@@ -7,6 +7,17 @@ const { camelizeKeys, decamelizeKeys } = require('humps');
 
 const router = express.Router();
 
+router.get('/users', (req, res, next) => {
+  return knex('users')
+  .select('id', 'first_name', 'last_name', 'email')
+  .then((users) => {
+    res.json(users);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+});
+
 router.post('/users', (req, res, next) => {
   const { email, password } = req.body;
 
@@ -31,7 +42,7 @@ router.post('/users', (req, res, next) => {
         const { firstName, lastName } = req.body;
         const insertUser = { firstName, lastName, email, hashedPassword };
 
-        return knex('users').insert(decamelizeKeys(insertUser), '*');
+        return knex('users').insert((insertUser), '*');
       })
       .then((rows) => {
         const user = camelizeKeys(rows[0]);

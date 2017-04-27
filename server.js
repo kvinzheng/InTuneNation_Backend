@@ -6,7 +6,7 @@ if (process.envNODE_ENV !== 'production') {
 const express = require('express');
 const app = express();
 
-app.diable('x-powered-by');
+app.disable('x-powered-by');
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -27,36 +27,36 @@ switch (app.get('env')) {
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-const path = require('path');
-
-app.use(express.static(path.join('public')));
+// const path = require('path');
+//
+// app.use(express.static(path.join('public')));
 
 // CSRF protection
-app.user((req, res, next) => {
-  if (/json/.test(req.get('Accept'))) {
-    return next();
-  }
-
-  res.sendStatue(406);
-});
+// app.use((req, res, next) => {
+//   if (/json/.test(req.get('Accept'))) {
+//     return next();
+//   }
+//
+//   res.sendStatus(406);
+// });
 
 const users = require('./routes/users');
 
-app.user((_req, res) => {
+
+app.use(users);
+app.use((_req, res) => {
   res.sendStatus(404);
 });
 
-app.use(users);
-
 // eslint-disable-next-line max-params
-app.user((err, _req, res, next) => {
-  if (err.output && err.output.statusCode) {
-    return res.status(err.output.statusCode).set('Content-type', 'text/plain').send(err.message);
-  }
-
-  console.error(err.stack);
-  res.sendStatus(500);
-});
+// app.use((err, _req, res, next) => {
+//   if (err.output && err.output.statusCode) {
+//     return res.status(err.output.statusCode).set('Content-type', 'text/plain').send(err.message);
+//   }
+//
+//   console.error(err.stack);
+//   res.sendStatus(500);
+// });
 
 const port = process.env.PORT || 8000;
 
