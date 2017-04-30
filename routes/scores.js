@@ -23,7 +23,6 @@ router.get('/users/:userId/exercises/:exId/scores/:scId', (req, res, next) => {
     .select()
     .where({
       id: req.params.scId,
-      user_id: req.params.userId,
       exercises_id: req.params.exId
     })
     .first()
@@ -38,7 +37,6 @@ router.get('/users/:userId/exercises/:exId/scores/:scId', (req, res, next) => {
 router.post('/users/:userId/exercises/:exId/scores', (req, res, next) => {
   knex('scores')
     .insert({
-      user_id: req.params.userId,
       exercises_id: req.params.exId,
       score_array: JSON.stringify(req.body.scoreArray),
       avg_score: req.body.avgScore

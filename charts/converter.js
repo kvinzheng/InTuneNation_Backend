@@ -1,82 +1,82 @@
 
-function getTeoriaNote(keyNum) {
+function getNoteAndOctave(keyNum) {
 
   switch (keyNum) {
     case 28:
-      return 'c3';
+      return { note: 'C', octave: 3 };
     case 29:
-      return 'c#3';
+      return { note: 'C# / Db', octave: 3 };
     case 30:
-      return 'd3';
+      return { note: 'D', octave: 3 };
     case 31:
-      return 'd#3';
+      return { note: 'D# / Eb', octave: 3 };
     case 32:
-      return 'e3';
+      return { note: 'E', octave: 3 };
     case 33:
-      return 'f3';
+      return { note: 'F', octave: 3 };
     case 34:
-      return 'f#3';
+      return { note: 'F# / Gb', octave: 3 };
     case 35:
-      return 'g3';
+      return { note: 'G', octave: 3 };
     case 36:
-      return 'g#3';
+      return { note: 'G# / Ab', octave: 3 };
     case 37:
-      return 'a3';
+      return { note: 'A', octave: 3 };
     case 38:
-      return 'a#3';
+      return { note: 'A# / Bb', octave: 3 };
     case 39:
-      return 'b3';
+      return { note: 'B', octave: 3 };
     case 40:
-      return 'c4';
+      return { note: 'C', octave: 4 };
     case 41:
-      return 'c#4';
+      return { note: 'C# / Db', octave: 4 };
     case 42:
-      return 'd4';
+      return { note: 'D', octave: 4 };
     case 43:
-      return 'd#4';
+      return { note: 'D# / Eb', octave: 4 };
     case 44:
-      return 'e4';
+      return { note: 'E', octave: 4 };
     case 45:
-      return 'f4';
+      return { note: 'F', octave: 4 };
     case 46:
-      return 'f#4';
+      return { note: 'F# / Gb', octave: 4 };
     case 47:
-      return 'g4';
+      return { note: 'G', octave: 4 };
     case 48:
-      return 'g#4';
+      return { note: 'G# / Ab', octave: 4 };
     case 49:
-      return 'a4';
+      return { note: 'A', octave: 4 };
     case 50:
-      return 'a#4';
+      return { note: 'A# / Bb', octave: 4 };
     case 51:
-      return 'b4';
+      return { note: 'B', octave: 4 };
     case 52:
-      return 'c5';
+      return { note: 'C', octave: 5 };
     case 53:
-      return 'c#5';
+      return { note: 'C# / Db', octave: 5 };
     case 54:
-      return 'd5';
+      return { note: 'D', octave: 5 };
     case 55:
-      return 'd#5';
+      return { note: 'D# / Eb', octave: 5 };
     case 56:
-      return 'e5';
+      return { note: 'E', octave: 5 };
     case 57:
-      return 'f5';
+      return { note: 'F', octave: 5 };
     case 58:
-      return 'f#5';
+      return { note: 'F# / Gb', octave: 5 };
     case 59:
-      return 'g5';
+      return { note: 'G', octave: 5 };
     case 60:
-      return 'g#5';
+      return { note: 'G# / Ab', octave: 5 };
     case 61:
-      return 'a5';
+      return { note: 'A', octave: 5 };
     case 62:
-      return 'a#5';
+      return { note: 'A# / Bb', octave: 5 };
     case 63:
-      return 'b5';
+      return { note: 'B', octave: 5 };
   }
 
 }
 
 
-export default getTeoriaNote;
+export default getNoteAndOctave;
