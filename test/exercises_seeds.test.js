@@ -1,6 +1,38 @@
-exports.seed = function (knex, Promise) {
-  return knex('exercises').del().then(() => {
-    return knex('exercises').insert([
+process.env.NODE_ENV = 'test';
+
+const request = require('supertest');
+const { expect, assert } = require('chai');
+
+const server = require('../server.js');
+const knex = require('../knex.js');
+
+beforeEach( done => {
+  knex.migrate.latest()
+  .then(() => {
+    return knex.seed.run()
+  })
+  .then(() => {
+    done();
+  })
+  .catch((err) => {
+    done(err);
+  });
+});
+
+afterEach((done) => {
+  knex.migrate.rollback()
+  .then(() => {
+    done();
+  })
+})
+
+
+describe('exercises seeds', () => {
+
+it('exercises rows', (done) => {
+  knex('exercises').orderBy('id', 'ASC')
+  .then((actual) => {
+    const expected = [
       {
         id: 1,
         user_id: 1,
@@ -141,9 +173,18 @@ exports.seed = function (knex, Promise) {
         created_at: new Date('2016-06-29 14:26:16 UTC'),
         updated_at: new Date('2016-06-29 14:26:16 UTC'),
       }
-
-    ]);
-  }).then(() => {
-    return knex.raw("SELECT setval('exercises_id_seq', (SELECT MAX(id) FROM exercises));");
+    ];
+      for( let i = 0; i < expected.length; i++){
+        assert.deepEqual(
+          actual[i],
+          expected[i],
+          `row id=${i + 1} not the same`
+        );
+      }
+      done();
+  })
+  .catch((err) => {
+    done(err);
   });
-};
+});
+});

@@ -41,6 +41,11 @@ app.use(cookieParser());
 //   res.sendStatus(406);
 // });
 const users = require('./routes/users');
+<<<<<<< HEAD
+const exercises = require('./routes/exercises');
+const scores = require('./routes/scores');
+const noteScore = require('./routes/noteScore');
+=======
 // console.log('what is middlewareVerify', middlewareVerify);
 // app.use('/users', middlewareVerify );
 
@@ -57,8 +62,13 @@ const users = require('./routes/users');
 // app.use('/auth', auth);
 //Google Auth
 
+>>>>>>> f0a56c3f35380925c39100009180ed9e218bf478
 
 app.use(users);
+app.use(exercises);
+app.use(scores);
+app.use(noteScore);
+
 app.use((_req, res) => {
   res.sendStatus(404);
 });

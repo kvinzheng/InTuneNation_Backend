@@ -29,7 +29,7 @@ afterEach((done) => {
 
 describe('GET /users', () => {
 
-  it('responds withJSON', done => {
+  it('responds with 200 & JSON', done => {
     request(server)
     .get('/users')
     .expect('Content-type', /json/)
