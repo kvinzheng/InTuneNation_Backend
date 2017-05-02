@@ -71,7 +71,7 @@ describe('GET /users', () => {
   });
 });
 
-describe('POST /users', () => {
+describe('POST /users/signup', () => {
   const newUser = {
     id: 5,
     firstName: 'Matt',

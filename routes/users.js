@@ -8,7 +8,8 @@ const { camelizeKeys, decamelizeKeys } = require('humps');
 const  { middlewareVerify } = require('../middlewares/verifications.js');
 const router = express.Router();
 
-router.get('/users', middlewareVerify);
+router.post('/users/login', middlewareVerify);
+router.post('/users/signup', middlewareVerify);
 
 router.get('/users', (req, res, next) => {
   return knex('users').select('id', 'first_name', 'last_name', 'email').then((users) => {
@@ -18,7 +19,53 @@ router.get('/users', (req, res, next) => {
   });
 });
 
-router.post('/users', (req, res, next) => {
+router.post('/users/login', (req, res, next) => {
+  const { email, password } = req.body;
+
+  if(!email || !email.trim()){
+    return res.status(400).send('Email must not be blank');
+  }
+
+  if(!password || !password.trim()){
+    return res.status(400).send('passwork must not be blank');
+  }
+
+  let authUser;
+
+  knex('users').where('email', email).first().then((user) => {
+    if(!user){
+      return res.status(400).send('Bad email ! Boom!');
+    }
+
+    authUser = camelizeKeys(user);
+    return bcrypt.compare(req.body.password, authUser.hashedPassword)
+  })
+  .then((match) => {
+    if (match === false) {
+      return res.status(400).send('Invalid username or password');
+    }
+    const claim = { userId: authUser.id };
+    const token = jwt.sign(claim, process.env.JWT_KEY, {
+      expiresIn: '7 days'
+    });
+    res.cookie('token', token, {
+      httpOnly: true,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+      secure: router.get('env') === 'prodution'
+    });
+
+    delete authUser.hashedPassword;
+    delete authUser.createdAt;
+    delete authUser.updatedAt;
+    authUser.token = token;
+    res.send(authUser);
+  })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.post('/users/signup', (req, res, next) => {
   if (req.body.email === undefined) {
     res.set('Content-type', 'text/plain');
     res.status(400).send('Email must not be blank');
@@ -52,7 +99,8 @@ router.post('/users', (req, res, next) => {
       const claim = {
         userId: camelizedUser.id
       };
-      const token = jwt.sign(claim, process.env.JWT_KEY, {expiresIn: '7 days'});
+      const token = jwt.sign(claim, process.env.JWT_KEY,
+        { expiresIn: '7 days' });
 
       res.cookie('token', token, {
         httpOnly: true,
@@ -66,7 +114,7 @@ router.post('/users', (req, res, next) => {
       res.set('Content-type', 'application/json');
       res.status(200).send(camelizedUser);
 
-    }, middlewareVerify )
+    } )
     .catch((error) => {
       next(error);
     });
