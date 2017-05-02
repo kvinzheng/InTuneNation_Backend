@@ -42,7 +42,7 @@ app.use(cookieParser());
 // });
 const users = require('./routes/users');
 // console.log('what is middlewareVerify', middlewareVerify);
-// app.use('/users', middlewareVerify);
+// app.use('/users', middlewareVerify );
 
 //GOOGLE auth
 // app.use(passport.initialize());

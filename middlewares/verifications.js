@@ -3,13 +3,14 @@ const jwt = require('jsonwebtoken');
 
 function middlewareVerify(req, res, next){
   // console.log("what is cookie?", req.headers);
-  jwt.verify(req.headers.cookie.substring(5), process.env.JWT_KEY, (err, payload) => {
+  jwt.verify(req.headers.cookie.substring(6), process.env.JWT_KEY, (err, payload) => {
     if (err) {
       // console.log('did i make an error?');
       res.status(401);
       res.send({ status: 401, ErrorMessage: 'Unauthorized' });
     }
     else{
+      console.log('is this work');
       tokenId = payload.userId;
       next();
     }
