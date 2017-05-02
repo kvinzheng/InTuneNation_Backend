@@ -3,6 +3,7 @@ if (process.envNODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
+const middlewareVerify = require('./middlewares/verifications.js');
 const express = require('express');
 const app = express();
 
@@ -39,6 +40,8 @@ app.use(cookieParser());
 //   res.sendStatus(406);
 // });
 const users = require('./routes/users');
+// console.log('what is middlewareVerify', middlewareVerify);
+// app.use('/users', middlewareVerify);
 
 app.use(users);
 app.use((_req, res) => {

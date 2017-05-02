@@ -1,13 +1,14 @@
 const bcrypt = require('bcrypt-as-promised');
 const boom = require('boom');
 const express = require('express');
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const knex = require('../knex');
 const bodyParser = require('body-parser');
 const { camelizeKeys, decamelizeKeys } = require('humps');
-
+const  { middlewareVerify } = require('../middlewares/verifications.js');
 const router = express.Router();
-// router.use(bodyParser());
+
+// router.get('/users', middlewareVerify );
 
 router.get('/users', (req, res, next) => {
   return knex('users').select('id', 'first_name', 'last_name', 'email').then((users) => {
@@ -65,7 +66,7 @@ router.post('/users', (req, res, next) => {
       res.set('Content-type', 'application/json');
       res.status(200).send(camelizedUser);
 
-    })
+    }, middlewareVerify )
     .catch((error) => {
       next(error);
     });
