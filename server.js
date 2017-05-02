@@ -24,9 +24,8 @@ switch (app.get('env')) {
   default:
 }
 
-app.use(bodyParser.json());
+app.use(bodyParser());
 app.use(cookieParser());
-
 // const path = require('path');
 //
 // app.use(express.static(path.join('public')));
@@ -39,9 +38,7 @@ app.use(cookieParser());
 //
 //   res.sendStatus(406);
 // });
-
 const users = require('./routes/users');
-
 
 app.use(users);
 app.use((_req, res) => {
