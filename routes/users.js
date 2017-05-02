@@ -8,8 +8,8 @@ const { camelizeKeys, decamelizeKeys } = require('humps');
 const  { middlewareVerify } = require('../middlewares/verifications.js');
 const router = express.Router();
 
-router.post('/users/login', middlewareVerify);
-router.post('/users/signup', middlewareVerify);
+// router.post('/users/login');
+// router.post('/users/signup', middlewareVerify);
 
 router.get('/users', (req, res, next) => {
   return knex('users').select('id', 'first_name', 'last_name', 'email').then((users) => {
@@ -51,7 +51,7 @@ router.post('/users/login', (req, res, next) => {
     res.cookie('token', token, {
       httpOnly: true,
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
-      secure: router.get('env') === 'prodution'
+      secure: router.get('env') === 'production'
     });
 
     delete authUser.hashedPassword;
