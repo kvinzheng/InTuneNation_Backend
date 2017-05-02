@@ -39,8 +39,15 @@ app.use(cookieParser());
 //   res.sendStatus(406);
 // });
 const users = require('./routes/users');
+const exercises = require('./routes/exercises');
+const scores = require('./routes/scores');
+const noteScore = require('./routes/noteScore');
 
 app.use(users);
+app.use(exercises);
+app.use(scores);
+app.use(noteScore);
+
 app.use((_req, res) => {
   res.sendStatus(404);
 });

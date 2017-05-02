@@ -79,4 +79,4 @@ function getNoteAndOctave(keyNum) {
 }
 
 
-export default getNoteAndOctave;
+module.exports = getNoteAndOctave;
