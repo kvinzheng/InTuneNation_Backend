@@ -3,6 +3,7 @@ if (process.envNODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
+const middlewareVerify = require('./middlewares/verifications.js');
 const express = require('express');
 const app = express();
 
@@ -12,6 +13,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 
+const configAuth = require('./config/auth');
 switch (app.get('env')) {
   case 'development':
     app.use(morgan('dev'));
@@ -24,7 +26,7 @@ switch (app.get('env')) {
   default:
 }
 
-app.use(bodyParser());
+app.use(bodyParser.json());
 app.use(cookieParser());
 // const path = require('path');
 //
@@ -39,9 +41,28 @@ app.use(cookieParser());
 //   res.sendStatus(406);
 // });
 const users = require('./routes/users');
+<<<<<<< HEAD
 const exercises = require('./routes/exercises');
 const scores = require('./routes/scores');
 const noteScore = require('./routes/noteScore');
+=======
+// console.log('what is middlewareVerify', middlewareVerify);
+// app.use('/users', middlewareVerify );
+
+//GOOGLE auth
+// app.use(passport.initialize());
+// app.use(passport.session());
+//
+//
+//
+// const cookieSession = require('cookie-session')
+// app.use(cookieSession({ secret: 'keyboard cat' }));
+// // this wires up passport's session code to your session
+// app.use(passport.session())
+// app.use('/auth', auth);
+//Google Auth
+
+>>>>>>> f0a56c3f35380925c39100009180ed9e218bf478
 
 app.use(users);
 app.use(exercises);
