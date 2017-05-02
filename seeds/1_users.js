@@ -1,13 +1,13 @@
 exports.seed = function (knex, Promise) {
-  // Deletes ALL existing entries
+  //Deletes All existing entries
   return knex('users').del().then(() => {
-    // Inserts seed entries
+    //Inserts seed entries
     return knex('users').insert([
       {
         id: 1,
-        first_name: 'Joanne',
-        last_name: 'Rowling',
-        email: 'jkrowling@gmail.com',
+        first_name: 'Bob',
+        last_name: 'Saget',
+        email: 'bobsaget@gmail.com',
         hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud8ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
         created_at: new Date('2016-06-29 14:26:16 UTC'),
         updated_at: new Date('2016-06-29 14:26:16 UTC'),
@@ -36,6 +36,33 @@ exports.seed = function (knex, Promise) {
         last_name: 'Yee',
         email: 'martytheemartian@yahoo.com',
         hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
+        created_at: new Date('2016-06-29 14:26:16 UTC'),
+        updated_at: new Date('2016-06-29 14:26:16 UTC'),
+      },
+      {
+        id: 5,
+        first_name: 'Michael',
+        last_name: 'Martinez',
+        email: 'martinez1212@gmail.com',
+        hashed_password: '$2a$12$C9AGYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
+        created_at: new Date('2016-06-29 14:26:16 UTC'),
+        updated_at: new Date('2016-06-29 14:26:16 UTC'),
+      },
+      {
+        id: 6,
+        first_name: 'Ryan',
+        last_name: 'Thissen',
+        email: 'rmt1855@gmail.com',
+        hashed_password: '$2a$12$C9AGYmcLVGYlGoO4SSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
+        created_at: new Date('2016-06-29 14:26:16 UTC'),
+        updated_at: new Date('2016-06-29 14:26:16 UTC'),
+      },
+      {
+        id: 7,
+        first_name: 'Alexander',
+        last_name: 'KKrawiec',
+        email: 'alexanderkrawiec@gmail.com',
+        hashed_password: '$2a$12$C9AGYmcLVGYlGoO4SSZTPud6ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
         created_at: new Date('2016-06-29 14:26:16 UTC'),
         updated_at: new Date('2016-06-29 14:26:16 UTC'),
       },
