@@ -8,7 +8,7 @@ const {camelizeKeys, decamelizeKeys} = require('humps');
 const {middlewareVerify} = require('../middlewares/verifications.js');
 const router = express.Router();
 // router.post('/users/login', middlewareVerify);
-router.post('/users/signup', middlewareVerify);
+router.post('/user/signup', middlewareVerify);
 
 require('../config/passport')(passport);
 
@@ -19,7 +19,7 @@ passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
 
-router.get('/users', (req, res, next) => {
+router.get('/user', (req, res, next) => {
   return knex('users').select('id', 'first_name', 'last_name', 'email').then((users) => {
     res.json(users);
   }).catch((err) => {

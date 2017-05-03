@@ -27,18 +27,18 @@ afterEach((done) => {
 })
 
 
-describe('GET /users', () => {
+describe('GET /user', () => {
 
   it('responds with 200 & JSON', done => {
     request(server)
-    .get('/users')
+    .get('/user')
     .expect('Content-type', /json/)
     .expect(200, done);
   });
 
   it('requests an array of all users when responding with JSON', done => {
     request(server)
-    .get('/users')
+    .get('/user')
     .end( (err, res ) => {
       expect(res.body).to.deep.equal([
         {
