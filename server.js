@@ -13,6 +13,10 @@ const app = express();
 const middlewareVerify = require('./middlewares/verifications.js');
 const users = require('./routes/users');
 const configAuth = require('./config/auth');
+const users = require('./routes/users');
+const exercises = require('./routes/exercises');
+const scores = require('./routes/scores');
+const noteScore = require('./routes/noteScore');
 
 app.disable('x-powered-by');
 switch (app.get('env')) {
@@ -29,15 +33,8 @@ switch (app.get('env')) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
-
-const users = require('./routes/users');
-const exercises = require('./routes/exercises');
-const scores = require('./routes/scores');
-const noteScore = require('./routes/noteScore');
-
-
-
 app.use(passport.initialize());
+
 app.use(users);
 app.use(exercises);
 app.use(scores);
