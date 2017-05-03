@@ -2,7 +2,7 @@ const express = require('express');
 const knex = require('../knex');
 const router = express.Router();
 
-
+// User can get score combinations from a particular exercise
 router.get('/users/:userId/exercises/:exId/scores', (req, res, next) => {
   knex('scores')
     .where({
@@ -19,6 +19,7 @@ router.get('/users/:userId/exercises/:exId/scores', (req, res, next) => {
     });
 });
 
+// User can get a particular score from the score combination of a particular exercise instance.
 router.get('/users/:userId/exercises/:exId/scores/:scId', (req, res, next) => {
   knex('scores')
     .where({
@@ -36,6 +37,7 @@ router.get('/users/:userId/exercises/:exId/scores/:scId', (req, res, next) => {
     });
 });
 
+// User can post new score combinations (and average score of the new score combination) to a particular exercise type.
 router.post('/users/:userId/exercises/:exId/scores', (req, res, next) => {
   knex('scores')
     .insert({
