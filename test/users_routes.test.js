@@ -95,7 +95,7 @@ describe('GET /users', () => {
   });
 });
 
-describe('POST /users/login', () => {
+describe('POST /user/login', () => {
   const logInUser = {
     email: 'parklewis@gmail.com',
     password: '12345678910'
@@ -119,7 +119,7 @@ describe('POST /users/login', () => {
 
   it('adds the user is in the data base as well', done => {
     request(server)
-    .post('/users/login')
+    .post('/user/login')
     .send(logInUser)
     .end((err, res) => {
       knex('users')
@@ -138,7 +138,7 @@ describe('POST /users/login', () => {
 
 
 
-describe('POST /users/signup', () => {
+describe('POST /user/signup', () => {
   const newUser = {
     firstName: 'Matt',
     lastName: 'Murr',
@@ -154,7 +154,7 @@ describe('POST /users/signup', () => {
   };
   it('sucessfully creates a new user', done => {
     request(server)
-      .post('/users/signup')
+      .post('/user/signup')
       .send(newUser)
       .expect((res) => {
         // console.log('what is res in signup', res.body);
@@ -167,7 +167,7 @@ describe('POST /users/signup', () => {
 
   it('adds the newUser to the database', done => {
     request(server)
-    .post('/users/signup')
+    .post('/user/signup')
     .send(newUser)
     .end((err, res) => {
       knex('users')
@@ -195,7 +195,7 @@ xdescribe('PUT /users/:id', () => {
 
   it('responds with JSON', done => {
     request(server)
-    .put('/user/1')
+    .put('/users/1')
     .send(updatedUser)
     .expect('Content-type', '/json/')
     .expect(200, done);

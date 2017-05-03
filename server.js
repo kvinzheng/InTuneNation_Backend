@@ -10,10 +10,9 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const app = express();
 
-const middlewareVerify = require('./middlewares/verifications.js');
+const { middlewareVerify } = require('./middlewares/verifications.js');
 const users = require('./routes/users');
 const configAuth = require('./config/auth');
-const users = require('./routes/users');
 const exercises = require('./routes/exercises');
 const scores = require('./routes/scores');
 const noteScore = require('./routes/noteScore');
@@ -34,6 +33,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(passport.initialize());
+
+// app.use('/users', middlewareVerify);
 
 app.use(users);
 app.use(exercises);

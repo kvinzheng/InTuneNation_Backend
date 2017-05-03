@@ -27,7 +27,7 @@ router.get('/users', (req, res, next) => {
   });
 });
 
-router.post('/users/login', (req, res, next) => {
+router.post('/user/login', (req, res, next) => {
   const {email, password} = req.body;
 
   if (!email || !email.trim()) {
@@ -71,7 +71,7 @@ router.post('/users/login', (req, res, next) => {
   });
 });
 
-router.post('/users/signup', (req, res, next) => {
+router.post('/user/signup', (req, res, next) => {
   if (req.body.email === undefined) {
     res.set('Content-type', 'text/plain');
     res.status(400).send('Email must not be blank');
