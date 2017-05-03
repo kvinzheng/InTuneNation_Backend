@@ -11,7 +11,7 @@ const morgan = require('morgan');
 const app = express();
 
 const middlewareVerify = require('./middlewares/verifications.js');
-const users = require('./routes/users');
+const user = require('./routes/user');
 const configAuth = require('./config/auth');
 const exercises = require('./routes/exercises');
 const scores = require('./routes/scores');
@@ -34,7 +34,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(passport.initialize());
 
-app.use(users);
+app.use(user);
+//app.user(user) only apply for login & sign up & get all user
+//this doesn't apply the middlewares;
 app.use(exercises);
 app.use(scores);
 app.use(noteScore);
