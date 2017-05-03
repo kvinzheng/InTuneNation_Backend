@@ -3,7 +3,7 @@ const knex = require('../knex');
 const router = express.Router();
 const getNoteAndOctave = require('../charts/converter');
 
-// route.get('/users/:userId/note-score/:keyNum',middlewareVerify)
+// User can get lifetime average score for a single note based on a particular key number given.
 router.get('/users/:userId/note-score/:keyNum', (req, res, next) => {
   knex('exercises')
     .where('user_id', req.params.userId)
@@ -36,9 +36,5 @@ router.get('/users/:userId/note-score/:keyNum', (req, res, next) => {
       res.status(400).send('Not Found.');
     });
 });
-
-
-
-
 
 module.exports = router;

@@ -19,6 +19,7 @@ passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
 
+// See all user information
 router.get('/user', (req, res, next) => {
   return knex('users').select('id', 'first_name', 'last_name', 'email').then((users) => {
     res.json(users);
@@ -27,6 +28,7 @@ router.get('/user', (req, res, next) => {
   });
 });
 
+// User can log into their account.
 router.post('/user/login', (req, res, next) => {
   const {email, password} = req.body;
 
@@ -71,6 +73,7 @@ router.post('/user/login', (req, res, next) => {
   });
 });
 
+// User can sign up for a new account with our database.
 router.post('/user/signup', (req, res, next) => {
   if (req.body.email === undefined) {
     res.set('Content-type', 'text/plain');
