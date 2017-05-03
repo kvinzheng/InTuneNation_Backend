@@ -3,7 +3,7 @@ const knex = require('../knex');
 const router = express.Router();
 import getNoteAndOctave from './charts/converter';
 
-
+// route.get('/users/:userId/note-score/:keyNum',middlewareVerify)
 router.get('/users/:userId/note-score/:keyNum', (req, res, next) => {
   knex('exercises')
     .where('user_id', req.params.userId)
