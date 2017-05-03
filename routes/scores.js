@@ -56,5 +56,4 @@ router.post('/users/:userId/exercises/:exId/scores', (req, res, next) => {
 });
 
 
-
 module.exports = router;
