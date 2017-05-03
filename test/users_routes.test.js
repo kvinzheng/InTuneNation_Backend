@@ -137,6 +137,7 @@ describe('POST /user/login', () => {
 });
 
 
+
 describe('POST /user/signup', () => {
   const newUser = {
     firstName: 'Matt',
@@ -194,7 +195,7 @@ xdescribe('PUT /users/:id', () => {
 
   it('responds with JSON', done => {
     request(server)
-    .put('/user/1')
+    .put('/users/1')
     .send(updatedUser)
     .expect('Content-type', '/json/')
     .expect(200, done);
