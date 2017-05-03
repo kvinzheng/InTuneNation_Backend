@@ -98,41 +98,33 @@ describe('GET /users', () => {
 describe('POST /users/login', () => {
   const logInUser = {
     email: 'parklewis@gmail.com',
-    password: '12345678910',
+    password: '12345678910'
   };
 
   const expectedUser = {
+    id: 8,
     firstName: 'parker',
     lastName: 'lewis',
     email: 'parklewis@gmail.com'
   };
 
-  it('sucessfully logs in user', done => {
-      request(server)
-      .post('/users/login')
-      .send(logInUser)
-      .expect((res)=> {
-        console.log('what is res.body before delete', res);
-        delete res.body.id;
-        delete res.body.token;
-        console.log('what is response.body', res.body);
-      })
-      .expect('Content-Type', /json/)
-      .expect(200, expectedUser)
-      .expect('set-cookie', /token=[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+; Path=\/;.+HttpOnly/)
-      .end(() => done());
-  });
+  // it('sucessfully logs in user', done => {
+  //   request(server)
+  //     .post('/users/login')
+  //     .send(logInUser)
+  //     .expect('Content-Type', /json/)
+  //     .end(done);
+  //   });
+  //
 
   it('adds the user is in the data base as well', done => {
     request(server)
     .post('/users/login')
     .send(logInUser)
     .end((err, res) => {
-      // console.log('what is respnse', res);
       knex('users')
       .select('first_name', 'last_name', 'email')
       .then(users => {
-        // console.log('what is user in line 125', users);
         expect(users).to.deep.include({
           first_name: 'parker',
           last_name: 'lewis',
@@ -165,9 +157,10 @@ describe('POST /users/signup', () => {
       .post('/users/signup')
       .send(newUser)
       .expect((res) => {
-        delete res.body.hashedPassword;
+        // console.log('what is res in signup', res.body);
       })
       .expect(expectedUser)
+      .expect('set-cookie', /token=[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+; Path=\/;.+HttpOnly/)
       .expect('Content-Type', /json/)
       .expect(200, done);
   });
@@ -182,7 +175,7 @@ describe('POST /users/signup', () => {
       .then(users => {
         expect(users).to.have.lengthOf(users.length);
         expect(users).to.deep.include({
-          id: 8,
+          id: 9,
           first_name: 'Matt',
           last_name: 'Murr',
           email: 'mattmurr@gmail.com'
@@ -204,7 +197,7 @@ xdescribe('PUT /users/:id', () => {
     request(server)
     .put('/user/1')
     .send(updatedUser)
-    .expect('Content-type','/json/')
+    .expect('Content-type', '/json/')
     .expect(200, done);
   });
 

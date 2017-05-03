@@ -60,9 +60,10 @@ router.post('/users/login', (req, res, next) => {
     authUser.token = token;
     res.send(authUser);
   })
-    .catch((err) => {
-      next(err);
-    });
+  .catch((err) => {
+    // res.send("foobar!!!!!!!!!!")
+    next(err);
+  });
 });
 
 router.post('/users/signup', (req, res, next) => {
