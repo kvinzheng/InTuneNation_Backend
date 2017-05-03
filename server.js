@@ -4,6 +4,7 @@ if (process.envNODE_ENV !== 'production') {
 }
 
 const express = require('express');
+const cors = require('cors');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -29,6 +30,7 @@ switch (app.get('env')) {
 
   default:
 }
+app.use(cors);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
