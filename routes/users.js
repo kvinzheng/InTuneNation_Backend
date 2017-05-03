@@ -8,7 +8,7 @@ const {camelizeKeys, decamelizeKeys} = require('humps');
 const {middlewareVerify} = require('../middlewares/verifications.js');
 const router = express.Router();
 // router.post('/users/login', middlewareVerify);
-router.post('/user/signup', middlewareVerify);
+// router.post('/user/signup', middlewareVerify);
 
 require('../config/passport')(passport);
 
