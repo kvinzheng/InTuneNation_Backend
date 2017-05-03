@@ -13,7 +13,6 @@ const app = express();
 const middlewareVerify = require('./middlewares/verifications.js');
 const users = require('./routes/users');
 const configAuth = require('./config/auth');
-const users = require('./routes/users');
 const exercises = require('./routes/exercises');
 const scores = require('./routes/scores');
 const noteScore = require('./routes/noteScore');
