@@ -1,28 +1,28 @@
-const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const configAuth = require('./auth');
-// Use the GoogleStrategy within Passport.
-//   Strategies in Passport require a `verify` function, which accept
-//   credentials (in this case, an accessToken, refreshToken, and Google
-//   profile), and invoke a callback with a user object.
-passport.use(new GoogleStrategy({
-  clientID: configAuth.googleAuth.clientID,
-  clientSecret: configAuth.googleAuth.clientSecret,
-  callbackURL: configAuth.googleAuth.callbackURL,
-  },
-  function(accessToken, refreshToken, profile, done) {
-    process.nextTick(function(){
+const configAuth = require('./auth.js');
 
-    })
-  }
-));
+const passportInfo = (passport) => {
 
-passport.serializeUser((object, done) => {
-  done(null, {token: object.token, id: object.profile.id})
-})
+  console.log('am i running slow');
+  console.log('what is ID', configAuth.googleAuth.clientID);
+  console.log('what is clientSecret', configAuth.googleAuth.clientSecret);
+  console.log('what is callbackURL,', configAuth.googleAuth.callbackURL)
+  passport.use(new GoogleStrategy({
+    clientID: configAuth.googleAuth.clientID,
+    clientSecret: configAuth.googleAuth.clientSecret,
+    callbackURL: configAuth.googleAuth.callbackURL
+  }, (token, accessToken, refreshToken, profile, done) => {
+    console.log('am i running this?');
+    process.nextTick(() => {
+      console.log(profile);
+      const user = {
+        first_name: profile.name.givenName,
+        last_name: profile.name.familyName,
+        email: profile.emails[0].value
+      };
+      done(null, user);
+    });
+  }));
+}
 
-passport.deserializeUser((object, done) => {
-  User.findById(object.id).then(user => {
-    done(null, user)
-  })
-})
+module.exports = passportInfo;

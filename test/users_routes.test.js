@@ -64,6 +64,30 @@ describe('GET /users', () => {
           first_name: 'Marty',
           last_name: 'Yee',
           email: 'martytheemartian@yahoo.com'
+        },
+        {
+          id: 5,
+          first_name: 'Michael',
+          last_name: 'Martinez',
+          email: 'martinez1212@gmail.com',
+        },
+        {
+          id: 6,
+          first_name: 'Ryan',
+          last_name: 'Thissen',
+          email: 'rmt1855@gmail.com',
+        },
+        {
+          id: 7,
+          first_name: 'Alexander',
+          last_name: 'KKrawiec',
+          email: 'alexanderkrawiec@gmail.com',
+        },
+        {
+          id: 8,
+          first_name: "parker",
+        	last_name: "lewis",
+          email: "parklewis@gmail.com",
         }
       ]);
       done();
@@ -71,9 +95,51 @@ describe('GET /users', () => {
   });
 });
 
-describe('POST /users', () => {
+describe('POST /users/login', () => {
+  const logInUser = {
+    email: 'parklewis@gmail.com',
+    password: '12345678910'
+  };
+
+  const expectedUser = {
+    id: 8,
+    firstName: 'parker',
+    lastName: 'lewis',
+    email: 'parklewis@gmail.com'
+  };
+
+  // it('sucessfully logs in user', done => {
+  //   request(server)
+  //     .post('/users/login')
+  //     .send(logInUser)
+  //     .expect('Content-Type', /json/)
+  //     .end(done);
+  //   });
+  //
+
+  it('adds the user is in the data base as well', done => {
+    request(server)
+    .post('/users/login')
+    .send(logInUser)
+    .end((err, res) => {
+      knex('users')
+      .select('first_name', 'last_name', 'email')
+      .then(users => {
+        expect(users).to.deep.include({
+          first_name: 'parker',
+          last_name: 'lewis',
+          email: 'parklewis@gmail.com'
+        });
+        done();
+      });
+    });
+  });
+});
+
+
+
+describe('POST /users/signup', () => {
   const newUser = {
-    id: 5,
     firstName: 'Matt',
     lastName: 'Murr',
     password: '123456password',
@@ -81,38 +147,39 @@ describe('POST /users', () => {
   };
 
   const expectedUser = {
-    id: 5,
-    first_name: 'Matt',
-    last_name: 'Murr',
+    id: 9,
+    firstName: 'Matt',
+    lastName: 'Murr',
     email: 'mattmurr@gmail.com'
   };
   it('sucessfully creates a new user', done => {
     request(server)
-      .post('/users')
+      .post('/users/signup')
       .send(newUser)
       .expect((res) => {
-        delete res.body.createdAt;
+        // console.log('what is res in signup', res.body);
       })
-      .expect({
-        id: 5 ,
-        firstName: 'Matt',
-        lastName: 'Murr',
-        email: 'mattmurr@gmail.com'
-      })
+      .expect(expectedUser)
+      .expect('set-cookie', /token=[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+; Path=\/;.+HttpOnly/)
       .expect('Content-Type', /json/)
       .expect(200, done);
   });
 
   it('adds the newUser to the database', done => {
     request(server)
-    .post('/users')
+    .post('/users/signup')
     .send(newUser)
     .end((err, res) => {
       knex('users')
       .select('id', 'first_name', 'last_name', 'email')
       .then(users => {
         expect(users).to.have.lengthOf(users.length);
-        expect(users).to.deep.include(expectedUser);
+        expect(users).to.deep.include({
+          id: 9,
+          first_name: 'Matt',
+          last_name: 'Murr',
+          email: 'mattmurr@gmail.com'
+        });
         done();
       });
     });
@@ -130,7 +197,7 @@ xdescribe('PUT /users/:id', () => {
     request(server)
     .put('/user/1')
     .send(updatedUser)
-    .expect('Content-type','/json/')
+    .expect('Content-type', '/json/')
     .expect(200, done);
   });
 
