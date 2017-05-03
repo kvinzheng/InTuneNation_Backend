@@ -24,7 +24,7 @@ switch (app.get('env')) {
     break;
 
   case 'production':
-    app.user(morgan('short'));
+    app.use(morgan('short'));
     break;
 
   default:
