@@ -7,6 +7,4 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
-  return knex.schema.dropTable('exercises');
-};
+exports.down = function(knex) { return knex.schema.dropTable('exercises'); };

@@ -30,9 +30,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 
+const users = require('./routes/users');
+const exercises = require('./routes/exercises');
+const scores = require('./routes/scores');
+const noteScore = require('./routes/noteScore');
+
+
 
 app.use(passport.initialize());
 app.use(users);
+app.use(exercises);
+app.use(scores);
+app.use(noteScore);
+
 app.use((_req, res) => {
   res.sendStatus(404);
 });
