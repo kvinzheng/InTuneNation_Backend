@@ -4,6 +4,7 @@ if (process.envNODE_ENV !== 'production') {
 }
 
 const express = require('express');
+const cors = require('cors');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -29,13 +30,14 @@ switch (app.get('env')) {
 
   default:
 }
+// app.use(cors);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(passport.initialize());
 
 
-app.use('/users', middlewareVerify);
+// app.use('/users', middlewareVerify);
 //app.user(users) only apply for login & sign up & get all user
 //this doesn't apply the middlewares;
 app.use(user);
