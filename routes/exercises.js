@@ -39,7 +39,7 @@ router.post('/users/:userId/exercises', (req, res, next) => {
     .where('notes_array', '=', JSON.stringify(req.body.notes_array))
     .first()
     .then((match) => {
-      if(match) {
+      if(match.length !== 0 ) {
         res.json(match);
       }
       else {
@@ -52,7 +52,7 @@ router.post('/users/:userId/exercises', (req, res, next) => {
             delete user_exercise[0].created_at;
             delete user_exercise[0].updated_at;
             res.json(user_exercise[0]);
-          })
+          });
       }
     })
     .catch((err) => {
