@@ -39,7 +39,7 @@ app.use(cookieParser());
 app.use(passport.initialize());
 
 
-app.use('/users', middlewareVerify);
+// app.use('/users', middlewareVerify);
 //app.user(users) only apply for login & sign up & get all user
 //this doesn't apply the middlewares;
 app.use(user);
