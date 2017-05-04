@@ -30,7 +30,11 @@ switch (app.get('env')) {
 
   default:
 }
-// app.use(cors);
+
+app.use(cors());
+app.options('*', cors());
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
