@@ -57,16 +57,16 @@ router.post('/user/login', (req, res, next) => {
       userId: authUser.id
     };
     const token = jwt.sign(claim, process.env.JWT_KEY, {expiresIn: '7 days'});
-    res.cookie('token', token, {
-      httpOnly: true,
-      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
-      secure: router.get('env') === 'production'
-    });
+    // res.cookie('token', token, {
+    //   httpOnly: true,
+    //   expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+    //   secure: router.get('env') === 'production'
+    // });
 
     delete authUser.hashedPassword;
     delete authUser.createdAt;
     delete authUser.updatedAt;
-    authUser.token = token;
+    res.set('Token', token);
     res.send(authUser);
   }).catch((err) => {
     next(err);
@@ -97,22 +97,23 @@ router.post('/user/signup', (req, res, next) => {
       }
       return knex('users').insert((newUser), '*');
     }).then((insertedUser) => {
-      const camelizedUser = camelizeKeys(insertedUser[0]);
+      let camelizedUser = camelizeKeys(insertedUser[0]);
       const claim = {
         userId: camelizedUser.id
       };
       const token = jwt.sign(claim, process.env.JWT_KEY, {expiresIn: '7 days'});
 
-      res.cookie('token', token, {
-        httpOnly: true,
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), // 7 days
-        secure: router.get('env') === 'production'
-      });
-
+      // res.cookie('token', token, {
+      //   httpOnly: true,
+      //   expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), // 7 days
+      //   secure: router.get('env') === 'production'
+      // });
       delete camelizedUser.hashedPassword;
       delete camelizedUser.createdAt;
       delete camelizedUser.updatedAt;
+      // camelizedUser.token = token;
       res.set('Content-type', 'application/json');
+      res.set('Token', token);
       res.status(200).send(camelizedUser);
 
     }).catch((error) => {
