@@ -67,7 +67,7 @@ router.post('/user/login', (req, res, next) => {
     delete authUser.createdAt;
     delete authUser.updatedAt;
     authUser.token = token;
-    res.set('Token', token);
+    res.set('token', token);
     res.send(authUser);
   }).catch((err) => {
     next(err);
@@ -114,7 +114,7 @@ router.post('/user/signup', (req, res, next) => {
       delete camelizedUser.updatedAt;
       camelizedUser.token = token;
       res.set('Content-type', 'application/json');
-      res.set('Token', token);
+      res.set('token', token);
       res.status(200).send(camelizedUser);
 
     }).catch((error) => {
