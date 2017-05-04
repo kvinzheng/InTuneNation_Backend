@@ -36,19 +36,34 @@ router.get('/users/:userId/exercises/:exId', (req, res, next) => {
 
 router.post('/users/:userId/exercises', (req, res, next) => {
   knex('exercises')
-    .insert({
-      user_id: req.params.userId,
-      notes_array: JSON.stringify(req.body.notes_array)
-    }, '*')
-    .then((user_exercise) => {
-      delete user_exercise[0].created_at;
-      delete user_exercise[0].updated_at;
-      res.json(user_exercise[0]);
+    .where('notes_array', '=', JSON.stringify(req.body.notes_array))
+    .first()
+    .then((match) => {
+      if(match) {
+        res.json(match);
+      }
+      else {
+        knex('exercises')
+          .insert({
+            user_id: req.params.userId,
+            notes_array: JSON.stringify(req.body.notes_array)
+          }, '*')
+          .then((user_exercise) => {
+            delete user_exercise[0].created_at;
+            delete user_exercise[0].updated_at;
+            res.json(user_exercise[0]);
+          })
+          .catch((err) => {
+            res.set('Content-type', 'text/plain');
+            res.status(400).send('Invalid Input');
+          });
+      }
     })
     .catch((err) => {
       res.set('Content-type', 'text/plain');
       res.status(400).send('Invalid Input');
     });
+
 });
 
 
