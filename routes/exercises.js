@@ -53,10 +53,6 @@ router.post('/users/:userId/exercises', (req, res, next) => {
             delete user_exercise[0].updated_at;
             res.json(user_exercise[0]);
           })
-          .catch((err) => {
-            res.set('Content-type', 'text/plain');
-            res.status(400).send('Invalid Input');
-          });
       }
     })
     .catch((err) => {
