@@ -116,7 +116,7 @@ router.post('/user/signup', (req, res, next) => {
       res.status(200).send(camelizedUser);
 
     }).catch((error) => {
-      next(error);
+      res.status(400).send('Invalid Input');
     });
   }
 });

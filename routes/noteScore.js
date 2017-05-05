@@ -33,7 +33,7 @@ router.get('/users/:userId/note-score/:keyNum', (req, res, next) => {
     })
     .catch((err) => {
       res.set('Content-type', 'text/plain');
-      res.status(400).send('Not Found.');
+      res.status(404).send('Not Found.');
     });
 });
 
