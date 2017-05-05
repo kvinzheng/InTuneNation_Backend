@@ -39,7 +39,7 @@ router.post('/users/:userId/exercises', (req, res, next) => {
     .where('notes_array', '=', JSON.stringify(req.body.notes_array))
     .first()
     .then((match) => {
-      if(match.length !== 0 ) {
+      if(match) {
         res.json(match);
       }
       else {
