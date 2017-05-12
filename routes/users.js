@@ -79,7 +79,7 @@ router.post('/user/login', (req, res, next) => {
 });
 
 // User can sign up for a new account with our database.
-router.post('/user/signup', (req, res, next) => {
+router.post('/user/signup', ev(validations.post), (req, res, next) => {
   if (req.body.email === undefined) {
     res.set('Content-type', 'text/plain');
     res.status(400).send('Email must not be blank');
