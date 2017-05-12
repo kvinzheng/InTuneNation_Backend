@@ -7,6 +7,10 @@ const bodyParser = require('body-parser');
 const {camelizeKeys, decamelizeKeys} = require('humps');
 const {middlewareVerify} = require('../middlewares/verifications.js');
 const router = express.Router();
+
+//validations
+const ev = require('express-validation');
+const validations = require('../validations/users.js');
 // router.post('/users/login', middlewareVerify);
 // router.post('/user/signup', middlewareVerify);
 
