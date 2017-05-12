@@ -21,10 +21,10 @@ passport.deserializeUser((obj, done) => {
 
 // See all user information
 router.get('/user', (req, res, next) => {
-  return knex('users').select('id', 'first_name', 'last_name', 'email').then((users) => {
+  return knex('users').select('d', 'first_name', 'last_name', 'email').then((users) => {
     res.json(users);
   }).catch((err) => {
-    console.log(err);
+    next(err);
   });
 });
 
@@ -118,6 +118,8 @@ router.post('/user/signup', (req, res, next) => {
       res.status(200).send(camelizedUser);
 
     }).catch((error) => {
+      // console.log('did i hit a error here?', error);
+      // res.send(error);
       next(error);
     });
   }
