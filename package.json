@@ -1,49 +1,49 @@
 {
-  "name": "PPPbackend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "mocha"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kvinzheng/PPPbackend-route.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kvinzheng/PPPbackend-route/issues"
-  },
-  "homepage": "https://github.com/kvinzheng/PPPbackend-route#readme",
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "dotenv": "^4.0.0",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.3",
-    "mocha": "^3.3.0",
-    "nodemon": "^1.11.0",
-    "supertest": "^3.0.0"
-  },
-  "dependencies": {
-    "bcrypt-as-promised": "^1.1.0",
-    "body-parser": "^1.17.1",
-    "boom": "^4.3.1",
-    "cookie-parser": "^1.4.3",
-    "cors": "^2.8.3",
-    "dotenv": "^4.0.0",
-    "express": "^4.15.2",
-    "humps": "^2.0.0",
-    "jsonwebtoken": "^7.4.0",
-    "knex": "^0.12.9",
-    "morgan": "^1.8.1",
-    "npm": "^4.5.0",
-    "passport": "^0.3.2",
-    "passport-google-oauth": "^1.0.0",
-    "pg": "^6.1.5"
-  }
+    "name": "PPPbackend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "test": "mocha"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kvinzheng/PPPbackend-route.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/kvinzheng/PPPbackend-route/issues"
+    },
+    "homepage": "https://github.com/kvinzheng/PPPbackend-route#readme",
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "dotenv": "^4.0.0",
+        "eslint": "^3.19.0",
+        "eslint-config-airbnb": "^14.1.0",
+        "eslint-plugin-import": "^2.2.0",
+        "eslint-plugin-jsx-a11y": "^4.0.0",
+        "eslint-plugin-react": "^6.10.3",
+        "mocha": "^3.3.0",
+        "nodemon": "^1.11.0",
+        "supertest": "^3.0.0"
+    },
+    "dependencies": {
+        "bcrypt-as-promised": "^1.1.0",
+        "body-parser": "^1.17.1",
+        "boom": "^4.3.1",
+        "cookie-parser": "^1.4.3",
+        "cors": "^2.8.3",
+        "dotenv": "^4.0.0",
+        "express": "^4.15.2",
+        "humps": "^2.0.0",
+        "jsonwebtoken": "^7.4.0",
+        "knex": "^0.12.9",
+        "morgan": "^1.8.1",
+        "npm": "^4.5.0",
+        "passport": "^0.3.2",
+        "passport-google-oauth": "^1.0.0",
+        "pg": "^6.1.5"
+    }
 }
