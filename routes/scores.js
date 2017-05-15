@@ -1,7 +1,9 @@
 const express = require('express');
 const knex = require('../knex');
 const router = express.Router();
-
+//validations
+const ev = require('express-validation');
+const validations = require('../validations/users.js');
 // User can get score combinations from a particular exercise
 router.get('/users/:userId/exercises/:exId/scores', (req, res, next) => {
   knex('scores')

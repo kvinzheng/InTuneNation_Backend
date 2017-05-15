@@ -2,6 +2,9 @@ const express = require('express');
 const knex = require('../knex');
 const router = express.Router();
 
+//validations
+const ev = require('express-validation');
+const validations = require('../validations/users.js');
 
 router.get('/users/:userId/exercises', (req, res, next) => {
   knex('exercises')

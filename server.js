@@ -51,6 +51,16 @@ app.use((_req, res) => {
   res.sendStatus(404);
 });
 
+app.use((err, _req, res, _next) =>{
+  if (err.status) {
+    return res
+    .status(err.status)
+    .set('Content-Type', 'text/plain')
+    .send(err.message);
+  }
+  console.error(err.stack);
+  res.sendStatus(500);
+});
 
 const port = process.env.PORT || 8000;
 
