@@ -4,10 +4,7 @@ the octaves and notes up into seperate functions.
 */
 
 function getNoteAndOctave( keyNum ) {
-<<<<<<< HEAD
-=======
 
->>>>>>> 8837da1403c357ab626617dfe51576fcfb1daa21
     switch ( keyNum ) {
     case 28:
         return {

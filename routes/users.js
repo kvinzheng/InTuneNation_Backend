@@ -20,7 +20,7 @@ const validations = require('../validations/users.js');
 // router.post('/users/login', middlewareVerify);
 // router.post('/user/signup', middlewareVerify);
 
-require( '../config/passport' )( passport );
+// require( '../config/passport' )( passport );
 
 passport.serializeUser( (user, done ) => {
   done( null, user );
