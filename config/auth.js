@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+require('dotenv').config();
+
+module.exports = {
+  'googleAuth': {
+    'clientID': process.env.clientID,
+    'clientSecret': process.env.clientSecret,
+    'callbackURL': 'http://localhost:8000/auth/google/callback'
+  }
+=======
 // NEVER EVER DO THIS!!!
 
 // Never put your clientID & clientSecret in anything that ends up on github.
@@ -10,4 +20,5 @@ module.exports = {
         'clientSecret': 'hSkCZxKPL09OZssxClttabXo',
         'callbackURL': 'http://localhost:8000/auth/google/callback'
     }
+>>>>>>> 8837da1403c357ab626617dfe51576fcfb1daa21
 }
