@@ -7,6 +7,10 @@ const bodyParser = require('body-parser');
 const {camelizeKeys, decamelizeKeys} = require('humps');
 const {middlewareVerify} = require('../middlewares/verifications.js');
 const router = express.Router();
+
+//validations
+const ev = require('express-validation');
+const validations = require('../validations/users.js');
 // router.post('/users/login', middlewareVerify);
 // router.post('/user/signup', middlewareVerify);
 
@@ -21,10 +25,10 @@ passport.deserializeUser((obj, done) => {
 
 // See all user information
 router.get('/user', (req, res, next) => {
-  return knex('users').select('id', 'first_name', 'last_name', 'email').then((users) => {
+  return knex('users').select('d', 'first_name', 'last_name', 'email').then((users) => {
     res.json(users);
   }).catch((err) => {
-    console.log(err);
+    next(err);
   });
 });
 
@@ -57,16 +61,17 @@ router.post('/user/login', (req, res, next) => {
       userId: authUser.id
     };
     const token = jwt.sign(claim, process.env.JWT_KEY, {expiresIn: '7 days'});
-    res.cookie('token', token, {
-      httpOnly: true,
-      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
-      secure: router.get('env') === 'production'
-    });
+    // res.cookie('token', token, {
+    //   httpOnly: true,
+    //   expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+    //   secure: router.get('env') === 'production'
+    // });
 
     delete authUser.hashedPassword;
     delete authUser.createdAt;
     delete authUser.updatedAt;
     authUser.token = token;
+    res.set('token', token);
     res.send(authUser);
   }).catch((err) => {
     next(err);
@@ -74,7 +79,7 @@ router.post('/user/login', (req, res, next) => {
 });
 
 // User can sign up for a new account with our database.
-router.post('/user/signup', (req, res, next) => {
+router.post('/user/signup', ev(validations.post), (req, res, next) => {
   if (req.body.email === undefined) {
     res.set('Content-type', 'text/plain');
     res.status(400).send('Email must not be blank');
@@ -97,25 +102,27 @@ router.post('/user/signup', (req, res, next) => {
       }
       return knex('users').insert((newUser), '*');
     }).then((insertedUser) => {
-      const camelizedUser = camelizeKeys(insertedUser[0]);
+      let camelizedUser = camelizeKeys(insertedUser[0]);
       const claim = {
         userId: camelizedUser.id
       };
       const token = jwt.sign(claim, process.env.JWT_KEY, {expiresIn: '7 days'});
 
-      res.cookie('token', token, {
-        httpOnly: true,
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), // 7 days
-        secure: router.get('env') === 'production'
-      });
-
+      // res.cookie('token', token, {
+      //   httpOnly: true,
+      //   expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), // 7 days
+      //   secure: router.get('env') === 'production'
+      // });
       delete camelizedUser.hashedPassword;
       delete camelizedUser.createdAt;
       delete camelizedUser.updatedAt;
+      camelizedUser.token = token;
       res.set('Content-type', 'application/json');
+      res.set('token', token);
       res.status(200).send(camelizedUser);
 
     }).catch((error) => {
+      //next(error);
       res.status(400).send('Invalid Input');
     });
   }

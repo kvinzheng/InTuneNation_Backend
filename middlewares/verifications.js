@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 // console.log('did i use middleware?');
 
 function middlewareVerify(req, res, next){
-  jwt.verify(req.headers.cookie.substring(6), process.env.JWT_KEY, (err, payload) => {
+  console.log('what is req.headers now kevin?', req.headers);
+  jwt.verify(req.headers.token, process.env.JWT_KEY, (err, payload) => {
     if (err) {
       // console.log('did i make an error?');
       res.status(401);
@@ -10,7 +11,7 @@ function middlewareVerify(req, res, next){
     }
     else{
       let tokenId = payload.userId;
-
+      req.claim = payload;
       next();
     }
   });
