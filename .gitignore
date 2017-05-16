@@ -1,4 +1,5 @@
-node_modules
+node_modules/
+.env
 .DS_Store
 .env
 clientID='561032879056-f8s3lcjn3g71vvkqu5ikigfni3tefkge.apps.googleusercontent.com'

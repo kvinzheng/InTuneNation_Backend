@@ -5,12 +5,13 @@ const jwt = require( 'jsonwebtoken' );
 const knex = require( '../knex' );
 const bodyParser = require( 'body-parser' );
 const {
-  camelizeKeys,
-  decamelizeKeys
+    camelizeKeys,
+    decamelizeKeys
 } = require( 'humps' );
 const {
-  middlewareVerify
-} = require('../middlewares/verifications.js');
+    middlewareVerify
+} = require( '../middlewares/verifications.js' );
+
 const router = express.Router();
 
 //validations
@@ -19,7 +20,7 @@ const validations = require('../validations/users.js');
 // router.post('/users/login', middlewareVerify);
 // router.post('/user/signup', middlewareVerify);
 
-require('../config/passport')(passport);
+require( '../config/passport' )( passport );
 
 passport.serializeUser( (user, done ) => {
   done( null, user );
@@ -153,5 +154,6 @@ router.get('/auth/google/callback', passport.authenticate('google'), (req, res) 
   console.log('what is google res', res);
   return res.send(req.session.passport.user)
 });
+
 
 module.exports = router;

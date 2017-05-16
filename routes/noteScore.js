@@ -1,7 +1,7 @@
-const express = require('express');
-const knex = require('../knex');
+const express = require( 'express' );
+const knex = require( '../knex' );
 const router = express.Router();
-const getNoteAndOctave = require('../charts/converter');
+const getNoteAndOctave = require( '../charts/converter' );
 
 // User can get lifetime average score for a single note based on a particular key number given.
 router.get( '/users/:userId/note-score/:keyNum', ( req, res, next ) => {
@@ -36,6 +36,7 @@ router.get( '/users/:userId/note-score/:keyNum', ( req, res, next ) => {
       res.set( 'Content-type', 'text/plain' );
       res.status( 400 ).send( 'Not Found.' );
     } );
+
 } );
 
 module.exports = router;
