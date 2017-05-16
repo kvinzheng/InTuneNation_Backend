@@ -25,7 +25,7 @@ passport.deserializeUser((obj, done) => {
 
 // See all user information
 router.get('/user', (req, res, next) => {
-  return knex('users').select('d', 'first_name', 'last_name', 'email').then((users) => {
+  return knex('users').select('id', 'first_name', 'last_name', 'email').then((users) => {
     res.json(users);
   }).catch((err) => {
     next(err);
