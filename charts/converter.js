@@ -190,5 +190,4 @@ function getNoteAndOctave( keyNum ) {
 
 }
 
-
 module.exports = getNoteAndOctave;
