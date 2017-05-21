@@ -82,18 +82,10 @@ router.post('/user/login', (req, res, next) => {
     delete authUser.createdAt;
     delete authUser.updatedAt;
     authUser.token = token;
-<<<<<<< HEAD
     res.set('token', token);
     res.send(authUser);
   }).catch((err) => {
     res.status(400).send('Incorrect Password.');
-=======
-    res.set( 'token', token );
-    res.send( authUser );
-  }).catch( ( err ) => {
-    next( err );
->>>>>>> 613f219d4f95e76216c4291e971cb23f2804b25b
-  });
 });
 
 // User can sign up for a new account with our database.
