@@ -142,6 +142,7 @@ router.post( '/user/signup', ev( validations.post ), ( req, res, next ) => {
     }).catch((error) => {
       res.status(400).send('Invalid Input.');
   }
+  }
 });
 //localhost:8000/auth/google
 // we could move these two to an auth router or an auth/google router.
