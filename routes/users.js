@@ -70,7 +70,7 @@ router.post('/user/login', (req, res, next) => {
     res.set('token', token);
     res.send(authUser);
   }).catch((err) => {
-    next(err);
+    res.status(400).send('Incorrect Password.');
   });
 });
 
@@ -118,9 +118,7 @@ router.post('/user/signup', (req, res, next) => {
       res.status(200).send(camelizedUser);
 
     }).catch((error) => {
-      // console.log('did i hit a error here?', error);
-      // res.send(error);
-      next(error);
+      res.status(400).send('Invalid Input.');
     });
   }
 });
