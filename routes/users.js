@@ -87,6 +87,7 @@ router.post('/user/login', (req, res, next) => {
   }).catch((err) => {
     res.status(400).send('Incorrect Password.');
 });
+});
 
 // User can sign up for a new account with our database.
 router.post( '/user/signup', ev( validations.post ), ( req, res, next ) => {
@@ -141,19 +142,19 @@ router.post( '/user/signup', ev( validations.post ), ( req, res, next ) => {
 
     }).catch((error) => {
       res.status(400).send('Invalid Input.');
-    })
+    });
   }
 });
 //localhost:8000/auth/google
 // we could move these two to an auth router or an auth/google router.
-router.get('/auth/google', passport.authenticate('google', {
-  scope: ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
-}));
-
-router.get('/auth/google/callback', passport.authenticate('google'), (req, res) => {
-  console.log('what is google res', res);
-  return res.send(req.session.passport.user)
-});
+// router.get('/auth/google', passport.authenticate('google', {
+//   scope: ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
+// }));
+//
+// router.get('/auth/google/callback', passport.authenticate('google'), (req, res) => {
+//   console.log('what is google res', res);
+//   return res.send(req.session.passport.user)
+// });
 
 
 module.exports = router;
