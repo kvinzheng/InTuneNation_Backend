@@ -8,7 +8,7 @@ const {camelizeKeys, decamelizeKeys} = require('humps');
 const {middlewareVerify} = require('../middlewares/verifications.js');
 const router = express.Router();
 // router.post('/users/login', middlewareVerify);
-router.post('/user/signup', middlewareVerify);
+// router.post('/user/signup', middlewareVerify);
 
 require('../config/passport')(passport);
 
@@ -19,6 +19,7 @@ passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
 
+// See all user information
 router.get('/user', (req, res, next) => {
   return knex('users').select('id', 'first_name', 'last_name', 'email').then((users) => {
     res.json(users);
@@ -27,6 +28,7 @@ router.get('/user', (req, res, next) => {
   });
 });
 
+// User can log into their account.
 router.post('/user/login', (req, res, next) => {
   const {email, password} = req.body;
 
@@ -67,10 +69,11 @@ router.post('/user/login', (req, res, next) => {
     authUser.token = token;
     res.send(authUser);
   }).catch((err) => {
-    next(err);
+    res.status(400).send('Incorrect Password.');
   });
 });
 
+// User can sign up for a new account with our database.
 router.post('/user/signup', (req, res, next) => {
   if (req.body.email === undefined) {
     res.set('Content-type', 'text/plain');
@@ -113,7 +116,7 @@ router.post('/user/signup', (req, res, next) => {
       res.status(200).send(camelizedUser);
 
     }).catch((error) => {
-      next(error);
+      res.status(400).send('Invalid Input.');
     });
   }
 });
