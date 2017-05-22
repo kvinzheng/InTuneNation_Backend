@@ -40,7 +40,7 @@ router.get('/users/:userId/exercises/:exId/scores/:scId', (req, res, next) => {
 });
 
 // User can post new score combinations (and average score of the new score combination) to a particular exercise type.
-router.post('/users/:userId/exercises/:exId/scores', (req, res, next) => {
+router.post('/users/:userId/exercises/:exId/scores', ev(validations.post),(req, res, next) => {
   knex('scores')
     .insert({
       user_id: req.params.userId,

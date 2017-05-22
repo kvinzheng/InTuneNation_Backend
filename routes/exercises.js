@@ -37,7 +37,7 @@ router.get('/users/:userId/exercises/:exId', (req, res, next) => {
 });
 
 
-router.post('/users/:userId/exercises', (req, res, next) => {
+router.post('/users/:userId/exercises', ev(validations.post), (req, res, next) => {
   knex('exercises')
     .where('notes_array', '=', JSON.stringify(req.body.notes_array))
     .first()

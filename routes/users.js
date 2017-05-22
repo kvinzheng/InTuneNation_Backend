@@ -40,7 +40,7 @@ router.get( '/user', ( req, res, next ) => {
 });
 
 // User can log into their account.
-router.post('/user/login', (req, res, next) => {
+router.post('/user/login', ev(validations.post),(req, res, next) => {
   const {
     email,
     password
@@ -91,7 +91,7 @@ router.post('/user/login', (req, res, next) => {
 });
 
 // User can sign up for a new account with our database.
-router.post( '/user/signup',  ( req, res, next ) => {
+router.post( '/user/signup', ev(validations.post), ( req, res, next ) => {
   if ( req.body.email === undefined ) {
     //if the user's email doesn't exist, then i will send a 400 response
     res.set( 'Content-type', 'text/plain' );
