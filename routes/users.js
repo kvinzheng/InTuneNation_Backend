@@ -17,7 +17,7 @@ const router = express.Router();
 //validations
 const ev = require('express-validation');
 const validations = require('../validations/users.js');
-console.log('what is validations', validations);
+// console.log('what is validations', validations);
 // router.post('/users/login', middlewareVerify);
 // router.post('/user/signup', middlewareVerify);
 
