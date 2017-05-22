@@ -23,12 +23,12 @@ const validations = require('../validations/users.js');
 
 // require( '../config/passport' )( passport );
 
-passport.serializeUser( (user, done ) => {
-  done( null, user );
-});
-passport.deserializeUser( ( obj, done ) => {
-  done( null, obj );
-});
+// passport.serializeUser( (user, done ) => {
+//   done( null, user );
+// });
+// passport.deserializeUser( ( obj, done ) => {
+//   done( null, obj );
+// });
 
 // See all user information
 router.get( '/user', ( req, res, next ) => {
@@ -91,7 +91,7 @@ router.post('/user/login', (req, res, next) => {
 });
 
 // User can sign up for a new account with our database.
-router.post( '/user/signup', ev( validations.post ), ( req, res, next ) => {
+router.post( '/user/signup',  ( req, res, next ) => {
   if ( req.body.email === undefined ) {
     //if the user's email doesn't exist, then i will send a 400 response
     res.set( 'Content-type', 'text/plain' );
