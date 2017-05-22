@@ -17,17 +17,18 @@ const router = express.Router();
 //validations
 const ev = require('express-validation');
 const validations = require('../validations/users.js');
+// console.log('what is validations', validations);
 // router.post('/users/login', middlewareVerify);
 // router.post('/user/signup', middlewareVerify);
 
 // require( '../config/passport' )( passport );
 
-passport.serializeUser( (user, done ) => {
-  done( null, user );
-});
-passport.deserializeUser( ( obj, done ) => {
-  done( null, obj );
-});
+// passport.serializeUser( (user, done ) => {
+//   done( null, user );
+// });
+// passport.deserializeUser( ( obj, done ) => {
+//   done( null, obj );
+// });
 
 // See all user information
 router.get( '/user', ( req, res, next ) => {
@@ -39,7 +40,7 @@ router.get( '/user', ( req, res, next ) => {
 });
 
 // User can log into their account.
-router.post('/user/login', (req, res, next) => {
+router.post('/user/login', ev(validations.post),(req, res, next) => {
   const {
     email,
     password
@@ -90,7 +91,7 @@ router.post('/user/login', (req, res, next) => {
 });
 
 // User can sign up for a new account with our database.
-router.post( '/user/signup', ev( validations.post ), ( req, res, next ) => {
+router.post( '/user/signup', ev(validations.post), ( req, res, next ) => {
   if ( req.body.email === undefined ) {
     //if the user's email doesn't exist, then i will send a 400 response
     res.set( 'Content-type', 'text/plain' );

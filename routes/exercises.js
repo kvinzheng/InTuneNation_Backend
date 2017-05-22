@@ -4,7 +4,7 @@ const router = express.Router();
 
 //validations
 const ev = require('express-validation');
-const validations = require('../validations/users.js');
+const validations = require('../validations/exercises.js');
 
 router.get('/users/:userId/exercises', (req, res, next) => {
   knex('exercises')
