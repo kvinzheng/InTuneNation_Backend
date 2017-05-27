@@ -58,7 +58,7 @@ router.post('/user/login', ev(validations.post),(req, res, next) => {
 
   knex( 'users' ).where( 'email', email ).first().then( ( user ) => {
     if ( !user ) {
-      return res.status( 400 ).send( 'Bad email ! Boom!' );
+      return res.status( 400 ).send( 'Bad email !' );
     }
 
     authUser = camelizeKeys( user );
