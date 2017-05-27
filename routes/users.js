@@ -87,7 +87,8 @@ router.post('/user/login', ev(validations.post),(req, res, next) => {
     res.send(authUser);
   }).catch((err) => {
     res.status(400).send('Incorrect Password.');
-});
+    // next(err);
+  });
 });
 
 // User can sign up for a new account with our database.
