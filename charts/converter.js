@@ -5,6 +5,27 @@ the octaves and notes up into seperate functions.
 
 function getNoteAndOctave( keyNum ) {
 
+<<<<<<< HEAD
+  let noteObj = {};
+
+  if (keyNum >= 28 && keyNum <= 39) {
+    noteObj['octave'] = 3;
+  }
+  else if (keyNum >= 40 && keyNum <= 51) {
+    noteObj['octave'] = 4;
+  }
+  else if (keyNum >= 52 && keyNum <= 63) {
+    noteObj['octave'] = 5;
+  }
+
+  const notesArray = ['G# / Ab', 'A', 'A# / Bb', 'B', 'C', 'C# / Db', 'D', 'D# / Eb', 'E', 'F', 'F# / Gb', 'G'];
+
+  let i = keyNum % 12;
+
+  noteObj['note', notesArray[i]];
+
+  return noteObj;
+=======
     switch ( keyNum ) {
     case 28:
         return {
@@ -187,6 +208,7 @@ function getNoteAndOctave( keyNum ) {
             octave: 5
         };
     }
+>>>>>>> 517aa9fd22f2df28b65363f95f1a9b965ff45c0e
 
 }
 
