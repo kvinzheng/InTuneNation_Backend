@@ -9,8 +9,8 @@ exports.seed = function (knex, Promise) {
         last_name: 'Saget',
         email: 'bobsaget@gmail.com',
         hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
-        created_at: new Date('2016-06-29 14:26:16 UTC'),
-        updated_at: new Date('2016-06-29 14:26:16 UTC'),
+        created_at: new Date('2016-06-21 14:26:16 UTC'),
+        updated_at: new Date('2016-06-21 14:26:16 UTC'),
       },
       {
         id: 2,
@@ -18,8 +18,8 @@ exports.seed = function (knex, Promise) {
         last_name: 'Zheng',
         email: 'kvinzheng@gmail.com',
         hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
-        created_at: new Date('2016-06-29 14:26:16 UTC'),
-        updated_at: new Date('2016-06-29 14:26:16 UTC'),
+        created_at: new Date('2016-06-22 14:26:16 UTC'),
+        updated_at: new Date('2016-06-22 14:26:16 UTC'),
       },
       {
         id: 3,
@@ -27,8 +27,8 @@ exports.seed = function (knex, Promise) {
         last_name: 'Delahunt',
         email: 'reidpierredelahunt@gmail.com',
         hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
-        created_at: new Date('2016-06-29 14:26:16 UTC'),
-        updated_at: new Date('2016-06-29 14:26:16 UTC'),
+        created_at: new Date('2016-06-23 14:26:16 UTC'),
+        updated_at: new Date('2016-06-23 14:26:16 UTC'),
       },
       {
         id: 4,
@@ -36,8 +36,8 @@ exports.seed = function (knex, Promise) {
         last_name: 'Yee',
         email: 'martytheemartian@yahoo.com',
         hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
-        created_at: new Date('2016-06-29 14:26:16 UTC'),
-        updated_at: new Date('2016-06-29 14:26:16 UTC'),
+        created_at: new Date('2016-06-24 14:26:16 UTC'),
+        updated_at: new Date('2016-06-24 14:26:16 UTC'),
       },
       {
         id: 5,
@@ -45,8 +45,8 @@ exports.seed = function (knex, Promise) {
         last_name: 'Martinez',
         email: 'martinez1212@gmail.com',
         hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
-        created_at: new Date('2016-06-29 14:26:16 UTC'),
-        updated_at: new Date('2016-06-29 14:26:16 UTC'),
+        created_at: new Date('2016-06-25 14:26:16 UTC'),
+        updated_at: new Date('2016-06-25 14:26:16 UTC'),
       },
       {
         id: 6,
@@ -54,8 +54,8 @@ exports.seed = function (knex, Promise) {
         last_name: 'Thissen',
         email: 'rmt1855@gmail.com',
         hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
-        created_at: new Date('2016-06-29 14:26:16 UTC'),
-        updated_at: new Date('2016-06-29 14:26:16 UTC'),
+        created_at: new Date('2016-06-26 14:26:16 UTC'),
+        updated_at: new Date('2016-06-26 14:26:16 UTC'),
       },
       {
         id: 7,
@@ -63,8 +63,8 @@ exports.seed = function (knex, Promise) {
         last_name: 'KKrawiec',
         email: 'alexanderkrawiec@gmail.com',
         hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
-        created_at: new Date('2016-06-29 14:26:16 UTC'),
-        updated_at: new Date('2016-06-29 14:26:16 UTC'),
+        created_at: new Date('2016-06-27 14:26:16 UTC'),
+        updated_at: new Date('2016-06-27 14:26:16 UTC'),
       },
       {
         id: 8,
@@ -72,8 +72,8 @@ exports.seed = function (knex, Promise) {
         last_name: 'lewis',
         email: 'parklewis@gmail.com',
         hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
-        created_at: new Date('2016-06-29 14:26:16 UTC'),
-        updated_at: new Date('2016-06-29 14:26:16 UTC'),
+        created_at: new Date('2016-06-28 14:26:16 UTC'),
+        updated_at: new Date('2016-06-28 14:26:16 UTC'),
       }
     ]);
   }).then(() => {

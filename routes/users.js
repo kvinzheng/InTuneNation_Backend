@@ -140,6 +140,7 @@ router.post( '/user/signup', ev(validations.post), ( req, res, next ) => {
 
       res.set('Content-type', 'application/json');
       res.set('token', token);
+      console.log('what is response in users', res);
       res.status(200).send(camelizedUser);
 
     }).catch((error) => {
