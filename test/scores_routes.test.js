@@ -26,7 +26,6 @@ afterEach((done) => {
   })
 })
 
-
 describe('GET /users/:userId/exercises/:exId/scores', () => {
 
   it('responds with 200 & JSON', done => {
