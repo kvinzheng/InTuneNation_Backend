@@ -58,7 +58,7 @@ router.post('/user/login', ev(validations.post),(req, res, next) => {
 
   knex( 'users' ).where( 'email', email ).first().then( ( user ) => {
     if ( !user ) {
-      return res.status( 400 ).send( 'Bad email ! Boom!' );
+      return res.status( 400 ).send( 'Bad email !' );
     }
 
     authUser = camelizeKeys( user );
@@ -87,7 +87,8 @@ router.post('/user/login', ev(validations.post),(req, res, next) => {
     res.send(authUser);
   }).catch((err) => {
     res.status(400).send('Incorrect Password.');
-});
+    // next(err);
+  });
 });
 
 // User can sign up for a new account with our database.
@@ -139,6 +140,7 @@ router.post( '/user/signup', ev(validations.post), ( req, res, next ) => {
 
       res.set('Content-type', 'application/json');
       res.set('token', token);
+      console.log('what is response in users', res);
       res.status(200).send(camelizedUser);
 
     }).catch((error) => {
