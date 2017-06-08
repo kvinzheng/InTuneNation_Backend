@@ -1,2 +1,8 @@
-nodemodules
+/node_modules
+
+.env
+soundCloud.env
 .DS_Store
+
+clientID
+clientSecret
