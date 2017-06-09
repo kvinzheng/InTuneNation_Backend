@@ -22,9 +22,9 @@ app.disable('x-powered-by');
 if ( app.get('env') === 'development' ) {
   app.use( morgan( 'dev' ) );
 }
-else if ( app.get('env') === 'development' ){
-    app.use( morgan( 'short' ) );
-}
+// else if ( app.get('env') === 'development' ){
+//     app.use( morgan( 'short' ) );
+// }
 
 app.use( cors() );
 app.options( '*', cors() );
