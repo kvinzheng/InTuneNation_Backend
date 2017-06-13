@@ -1,3 +1,4 @@
+// eslint-space-in-parens
 const passport = require( 'passport' );
 const bcrypt = require( 'bcrypt-as-promised' );
 const express = require( 'express' );
@@ -47,25 +48,25 @@ router.post('/user/login', ev(validations.post),(req, res, next) => {
   } = req.body;
 
   if ( !email || !email.trim() ) {
-    return res.status(400).send( 'Email must not be blank' );
+    return res.status(400).send( 'The email field must not be blank.' );
   }
 
   if ( !password || !password.trim() ) {
-    return res.status( 400 ).send( 'passwork must not be blank' );
+    return res.status( 400 ).send( 'The password field must not be blank.' );
   }
 
   let authUser;
 
   knex( 'users' ).where( 'email', email ).first().then( ( user ) => {
     if ( !user ) {
-      return res.status( 400 ).send( 'Bad email !' );
+      return res.status( 400 ).send( 'Invalid email or password.' );
     }
 
     authUser = camelizeKeys( user );
     return bcrypt.compare( req.body.password, authUser.hashedPassword )
   }).then( ( match ) => {
     if ( match === false ) {
-      return res.status( 400 ).send( 'Invalid username or password' );
+      return res.status( 400 ).send( 'Invalid email or password.' );
     }
     const claim = {
       userId: authUser.id
@@ -86,7 +87,7 @@ router.post('/user/login', ev(validations.post),(req, res, next) => {
     res.set('token', token);
     res.send(authUser);
   }).catch((err) => {
-    res.status(400).send('Incorrect Password.');
+    res.status(400).send('Invalid email or password.');
     // next(err);
   });
 });
@@ -97,18 +98,18 @@ router.post( '/user/signup', ev(validations.post), ( req, res, next ) => {
     //if the user's email doesn't exist, then i will send a 400 response
     res.set( 'Content-type', 'text/plain' );
     res.status( 400 )
-      .send( 'Email must not be blank' );
+      .send( 'The email field must not be blank.' );
   } else if ( req.body.password === undefined || req.body.password.length < 8) {
     //if the user password doesn't exist, then i will send a 400 response
     res.set('Content-type', 'text/plain');
     return res.status(400)
-      .send('Password must be at least 8 characters long');
+      .send('Please make sure that the password is at least 8 characters long.');
   } else {
     //posting the email and password and send a 400 response if the email exist already
     knex( 'users' ).where( 'email', req.body.email ).first().then( (user) => {
       if ( user ) {
         res.set( 'Content-type', 'text/plain' );
-        res.status( 400 ).send( 'Email already exist!' );
+        res.status( 400 ).send( 'An account with this email address already exists.' );
       }
       return bcrypt.hash( req.body.password, 12 );
     }).then( ( hashedPassword ) => {
@@ -140,7 +141,6 @@ router.post( '/user/signup', ev(validations.post), ( req, res, next ) => {
 
       res.set('Content-type', 'application/json');
       res.set('token', token);
-      console.log('what is response in users', res);
       res.status(200).send(camelizedUser);
 
     }).catch((error) => {

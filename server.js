@@ -21,10 +21,8 @@ const RedisStore = require('connect-redis')(session);
 
 app.disable('x-powered-by');
 
-if (app.get('env') === 'development') {
-  app.use(morgan('dev'));
-} else if (app.get('env') === 'development') {
-  app.use(morgan('short'));
+if ( app.get('env') === 'development' ) {
+  app.use( morgan( 'dev' ) );
 }
 
 app.use(cors());
