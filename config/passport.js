@@ -74,6 +74,7 @@ router.get('/auth/google/callback', passport.authenticate('google', {
 router.get('/auth/google/success', (req, res, next) => {
   knex('users').where('email', newUser.email).first().then((user) => {
     if (user) {
+      delete user.hashed_password;
       return res.json(user);
     }
   }).catch(error => console.log(error));
