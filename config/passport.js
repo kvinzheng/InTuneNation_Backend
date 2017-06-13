@@ -70,8 +70,13 @@ router.get('/auth/google/callback', passport.authenticate('google', {
   successRedirect: '/auth/google/success',
   failureRedirect: '/auth/google/failure'
 }));
+
 router.get('/auth/google/success', (req, res, next) => {
-  return res.json(newUser);
+  knex('users').where('email', newUser.email).first().then((user) => {
+    if (user) {
+      return res.json(user);
+    }
+  }).catch(error => console.log(error));
 });
 router.get('/auth/google/failure', (req, res, next) => {
   return res.json('user is not authenticated yet');
