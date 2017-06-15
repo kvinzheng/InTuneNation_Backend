@@ -87,8 +87,11 @@ router.get('/auth/google/callback', passport.authenticate('google', {
 
 //creating success for google OAuth
 router.get('/auth/google/success', (req, res, next) => {
-
-  let query = queryString.stringify(newUser);
+  let temp = JSON.stringify(newUser);
+  console.log('what is temp', temp)
+  let query = queryString.stringify({'result':temp});
+  let parsed = queryString.parse(query);
+  console.log('what is parse', parsed)
   res.redirect('http://localhost:3000/?' + query);
 });
 router.get('/auth/google/failure', (req, res, next) => {
