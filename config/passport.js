@@ -92,9 +92,10 @@ router.get('/auth/google/success', (req, res, next) => {
   knex('users').where('email', newUser.email).first().then((user) => {
     result = user;
     console.log('result==',result);
+    let string = encodeURIComponent(JSON.stringify(result));
+    res.redirect('http://localhost:3000/profile/?' + string);
   });
-  let string = encodeURIComponent(JSON.stringify(result));
-  res.redirect('http://localhost:3000/?' + string);
+
 });
 router.get('/auth/google/failure', (req, res, next) => {
   return res.json('user is not authenticated yet');
