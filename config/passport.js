@@ -88,7 +88,7 @@ router.get('/auth/google/success', (req, res, next) => {
     result.token = token;
 
     let string = encodeURIComponent(JSON.stringify(result));
-    res.redirect('https://intunenation.herokuapp.com/profile/?' + string);
+    res.redirect('http://localhost:3000/profile/?' + string);
   });
 
 });
