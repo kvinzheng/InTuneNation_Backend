@@ -10,6 +10,7 @@ const app = express();
 const morgan = require('morgan');
 const router = express.Router();
 const queryString = require('query-string');
+const jwt = require( 'jsonwebtoken' );
 
 if (app.get('env') === 'development') {
   app.use(morgan('dev'));
@@ -91,6 +92,13 @@ router.get('/auth/google/success', (req, res, next) => {
   let result;
   knex('users').where('email', newUser.email).first().then((user) => {
     result = user;
+    let claim = {
+      userId: result.id
+    };
+    let token = jwt.sign( claim, process.env.JWT_KEY, {
+      expiresIn: '7 days'
+    } );
+    result.token = token
     console.log('result==',result);
     let string = encodeURIComponent(JSON.stringify(result));
     res.redirect('http://localhost:3000/profile/?' + string);
