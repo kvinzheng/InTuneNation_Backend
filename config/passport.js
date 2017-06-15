@@ -74,21 +74,7 @@ router.get('/auth/google/callback', passport.authenticate('google', {
   failureRedirect: '/auth/google/failure'
 }));
 
-//creating the url for redirect
-
-// app.get('/category', function(req, res) {
-//       const query = querystring.stringify({
-//           "a": 1,
-//           "b": 2,
-//           "valid":"your string here"
-//       });
-//       res.redirect('/?' + query);
-//  });
-
-
-//creating success for google OAuth
 router.get('/auth/google/success', (req, res, next) => {
-  // console.log('newUser',newUser)
   let result;
   knex('users').where('email', newUser.email).first().then((user) => {
     result = user;
@@ -98,8 +84,8 @@ router.get('/auth/google/success', (req, res, next) => {
     let token = jwt.sign( claim, process.env.JWT_KEY, {
       expiresIn: '7 days'
     } );
-    result.token = token
-    console.log('result==',result);
+    result.token = token;
+    
     let string = encodeURIComponent(JSON.stringify(result));
     res.redirect('http://localhost:3000/profile/?' + string);
   });
