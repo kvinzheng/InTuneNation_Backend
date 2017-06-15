@@ -9,10 +9,12 @@ const RedisStore = require('connect-redis')(session);
 const app = express();
 const morgan = require('morgan');
 const router = express.Router();
+const queryString = require('query-string');
 
 if (app.get('env') === 'development') {
   app.use(morgan('dev'));
 }
+app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -71,18 +73,23 @@ router.get('/auth/google/callback', passport.authenticate('google', {
   failureRedirect: '/auth/google/failure'
 }));
 
+//creating the url for redirect
+
+app.get('/category', function(req, res) {
+      const query = querystring.stringify({
+          "a": 1,
+          "b": 2,
+          "valid":"your string here"
+      });
+      res.redirect('/?' + query);
+ });
+
+
+//creating success for google OAuth
 router.get('/auth/google/success', (req, res, next) => {
-    // res.redirect('https://intunenation.herokuapp.com/');
-      // console.log('here?');
-  knex('users').where('email', newUser.email).first().then((user) => {
-    if (user) {
-      delete user.hashed_password;
-      return res.json(user);
-    }
-  }).catch(error => console.log(error));
 
-console.log('here after?');
-
+  let query = queryString.stringify(newUser);
+  res.redirect('https://intunenation.herokuapp.com/?' + query);
 });
 router.get('/auth/google/failure', (req, res, next) => {
   return res.json('user is not authenticated yet');
