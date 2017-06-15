@@ -37,7 +37,7 @@ passport.use(new GoogleStrategy({
     first_name: profile.name.givenName,
     last_name: profile.name.familyName,
     email: profile.email,
-    hashed_password: 'null',
+    hashed_password: 'GoogleOAuth',
     profile_picture: profile.photos[0].value
   }
 
