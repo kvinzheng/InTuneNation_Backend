@@ -43,6 +43,8 @@ passport.use(new GoogleStrategy({
   knex('users').where('email', newUser.email).first().then((user) => {
     if (user) {
       //user exist in the user table
+      knex('users').insert((newUser), '*').catch( err =>
+      console.log('if user exist') );
       return done(null, newUser);
       // return;
     } else {
@@ -85,7 +87,7 @@ router.get('/auth/google/success', (req, res, next) => {
       expiresIn: '7 days'
     } );
     result.token = token;
-    
+
     let string = encodeURIComponent(JSON.stringify(result));
     res.redirect('http://localhost:3000/profile/?' + string);
   });
