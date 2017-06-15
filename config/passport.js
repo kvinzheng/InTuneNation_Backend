@@ -72,7 +72,7 @@ router.get('/auth/google/callback', passport.authenticate('google', {
 }));
 
 router.get('/auth/google/success', (req, res, next) => {
-    res.redirect('/');
+    res.redirect('https://intunenation.herokuapp.com/');
       console.log('here?');
   knex('users').where('email', newUser.email).first().then((user) => {
     if (user) {
