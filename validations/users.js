@@ -13,6 +13,6 @@ const Joi = require('joi');
       .label('Password')
       .required()
       .trim()
-      .min(8)
+      // .min(8)
   }
 };
