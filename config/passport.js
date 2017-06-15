@@ -75,14 +75,14 @@ router.get('/auth/google/callback', passport.authenticate('google', {
 
 //creating the url for redirect
 
-app.get('/category', function(req, res) {
-      const query = querystring.stringify({
-          "a": 1,
-          "b": 2,
-          "valid":"your string here"
-      });
-      res.redirect('/?' + query);
- });
+// app.get('/category', function(req, res) {
+//       const query = querystring.stringify({
+//           "a": 1,
+//           "b": 2,
+//           "valid":"your string here"
+//       });
+//       res.redirect('/?' + query);
+//  });
 
 
 //creating success for google OAuth
