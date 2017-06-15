@@ -89,7 +89,7 @@ router.get('/auth/google/callback', passport.authenticate('google', {
 router.get('/auth/google/success', (req, res, next) => {
 
   let query = queryString.stringify(newUser);
-  res.redirect('https://intunenation.herokuapp.com/?' + query);
+  res.redirect('http://localhost:8000/?' + query);
 });
 router.get('/auth/google/failure', (req, res, next) => {
   return res.json('user is not authenticated yet');
