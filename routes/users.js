@@ -127,7 +127,7 @@ router.post( '/user/signup', ev(validations.post), ( req, res, next ) => {
       };
       const token = jwt.sign( claim, process.env.JWT_KEY, {
         expiresIn: '7 days'
-      } );
+      });
 
       // res.cookie('token', token, {
       //   httpOnly: true,
@@ -148,16 +148,5 @@ router.post( '/user/signup', ev(validations.post), ( req, res, next ) => {
     });
   }
 });
-//localhost:8000/auth/google
-// we could move these two to an auth router or an auth/google router.
-// router.get('/auth/google', passport.authenticate('google', {
-//   scope: ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
-// }));
-//
-// router.get('/auth/google/callback', passport.authenticate('google'), (req, res) => {
-//   console.log('what is google res', res);
-//   return res.send(req.session.passport.user)
-// });
-
 
 module.exports = router;
