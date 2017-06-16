@@ -39,11 +39,7 @@ router.get( '/user', ( req, res, next ) => {
     next( err );
   });
 });
-//google OAtuh New Rount
-route.oist('/oauth/login', (req, res, next) => {
-  const { email } = req.body;
 
-})
 // User can log into their account.
 router.post('/user/login', ev(validations.post),(req, res, next) => {
   const {
