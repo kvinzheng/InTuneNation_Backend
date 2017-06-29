@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 // console.log('did i use middleware?');
 
 function middlewareVerify(req, res, next){
-  console.log('what is req.headers now kevin?', req.headers);
+  // console.log('what is req.headers now kevin?', req.headers);
   jwt.verify(req.headers.token, process.env.JWT_KEY, (err, payload) => {
     if (err) {
       // console.log('did i make an error?');

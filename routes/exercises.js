@@ -40,6 +40,7 @@ router.get('/users/:userId/exercises/:exId', (req, res, next) => {
 router.post('/users/:userId/exercises', ev(validations.post), (req, res, next) => {
   knex('exercises')
     .where('notes_array', '=', JSON.stringify(req.body.notes_array))
+    .where('user_id', req.params.userId)
     .first()
     .then((match) => {
       if(match) {
