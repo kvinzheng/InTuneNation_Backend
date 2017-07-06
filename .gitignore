@@ -6,3 +6,5 @@ soundCloud.env
 
 clientID
 clientSecret
+
+npm-debug.log
