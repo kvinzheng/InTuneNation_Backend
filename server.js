@@ -2,7 +2,7 @@
 if (process.envNODE_ENV !== 'production') {
   require('dotenv').config();
 }
-const session = require('express-session')
+const session = require('express-session');
 const express = require('express');
 const cors = require('cors');
 const passport = require('passport');
@@ -16,7 +16,7 @@ const configAuth = require('./config/auth');
 const exercises = require('./routes/exercises');
 const scores = require('./routes/scores');
 const noteScore = require('./routes/noteScore');
-const {googleRouter} = require('./config/passport.js');
+const { googleRouter } = require('./config/passport.js');
 const knex = require('./knex');
 
 app.disable('x-powered-by');
@@ -29,12 +29,12 @@ app.use(cors());
 app.options('*', cors());
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(passport.initialize());
 
-const {middlewareVerify} = require('./middlewares/verifications.js');
-app.use('/users', middlewareVerify);
+const { verifyMiddleware } = require('./middlewares/verifications.js');
+app.use('/users', verifyMiddleware);
 //app.user(users) only apply for login & sign up & get all user
 
 //this doesn't apply the middlewares;

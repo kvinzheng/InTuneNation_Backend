@@ -10,7 +10,7 @@ const {
     decamelizeKeys
 } = require( 'humps' );
 const {
-    middlewareVerify
+    verifyMiddleware
 } = require( '../middlewares/verifications.js' );
 
 const router = express.Router();
@@ -18,9 +18,8 @@ const router = express.Router();
 //validations
 const ev = require('express-validation');
 const validations = require('../validations/users.js');
-// console.log('what is validations', validations);
-// router.post('/users/login', middlewareVerify);
-// router.post('/user/signup', middlewareVerify);
+// router.post('/users/login', verifyMiddleware);
+// router.post('/user/signup', verifyMiddleware);
 
 // require( '../config/passport' )( passport );
 

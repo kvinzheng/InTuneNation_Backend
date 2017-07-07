@@ -136,8 +136,6 @@ describe('POST /user/login', () => {
   });
 });
 
-
-
 describe('POST /user/signup', () => {
   const newUser = {
     firstName: 'Matt',

@@ -8,6 +8,7 @@ const validations = require('../validations/exercises.js');
 
 router.get('/users/:userId/exercises', (req, res, next) => {
   knex('exercises')
+    // .select('exercises.id', 'exercises.notes_array')
     .where('user_id', req.params.userId)
     .orderBy('id', 'asc')
     .then((user_exercises) => {
