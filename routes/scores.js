@@ -39,6 +39,22 @@ router.get('/users/:userId/exercises/:exId/scores/:scId', (req, res, next) => {
     });
 });
 
+
+router.get('/users/:userId/averagelifetimescore', (req, res, next) => {
+  knex('scores')
+    .where('user_id', req.params.userId)
+    .then((match) => {
+      let averageArr = match.map( ele => { return ele.avg_score } );
+      let sum = averageArr.reduce( (acc, cur) => { return acc + cur; } );
+      let average = sum/averageArr.length;
+      res.json(average);
+    })
+    .catch((err) => {
+      res.set('Content-type', 'text/plain');
+      res.status(400).send('Invalid Input');
+    });
+});
+
 // User can post new score combinations (and average score of the new score combination) to a particular exercise type.
 router.post('/users/:userId/exercises/:exId/scores', ev(validations.post),(req, res, next) => {
   knex('scores')
