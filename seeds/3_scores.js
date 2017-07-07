@@ -16,7 +16,7 @@ exports.seed = function (knex, Promise) {
         exercises_id: 1,
         scores_array: '[77,88,85]',
         avg_score: 83.33,
-        created_at: new Date('2016-06-29 14:26:16 UTC'),
+        created_at: new Date('2016-06-29 14:26:16 UTC'),minim
         updated_at: new Date('2016-06-29 14:26:16 UTC'),
       },
       {
