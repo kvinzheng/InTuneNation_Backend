@@ -40,7 +40,7 @@ router.get('/users/:userId/exercises/:exId/scores/:scId', (req, res, next) => {
 });
 
 
-router.get('/users/:userId/average', (req, res, next) => {
+router.get('/users/:userId/averagelifetimescore', (req, res, next) => {
   knex('scores')
     .where('user_id', req.params.userId)
     .then((match) => {
