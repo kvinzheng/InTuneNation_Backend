@@ -36,7 +36,7 @@ router.get('/users/:userId/exercises/:exId', (req, res, next) => {
     });
 });
 
-
+//insert exercises
 router.post('/users/:userId/exercises', ev(validations.post), (req, res, next) => {
   knex('exercises')
     .where('notes_array', '=', JSON.stringify(req.body.notes_array))
@@ -63,7 +63,6 @@ router.post('/users/:userId/exercises', ev(validations.post), (req, res, next) =
       res.set('Content-type', 'text/plain');
       res.status(400).send('Invalid Input');
     });
-
 });
 
 
