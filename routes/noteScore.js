@@ -3,7 +3,7 @@ const knex = require( '../knex' );
 const router = express.Router();
 const getNoteAndOctave = require( '../charts/converter' );
 
-// User can get lifetime aver2age score for a single note based on a particular key number given.
+// User can get lifetime average score for a single note based on a particular key number given.
 router.get( '/users/:userId/note-score/:keyNum', ( req, res, next ) => {
   const keyNum = parseInt(req.params.keyNum);
   knex('exercises')
@@ -42,8 +42,6 @@ router.get( '/users/:userId/note-score/:keyNum', ( req, res, next ) => {
         key_num_score_avg: scoreAvg,
       };
       map.push(avgScoreObj);
-      // map.push(allScores);
-      // console.log(map);
       res.json(avgScoreObj);
     })
     .catch((err) => {
