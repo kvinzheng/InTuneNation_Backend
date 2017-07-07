@@ -44,14 +44,13 @@ router.get( '/users/:userId/note-score/:keyNum', ( req, res, next ) => {
       map.push(avgScoreObj);
       // map.push(allScores);
       // console.log(map);
-      res.json(map);
+      res.json(avgScoreObj);
     })
     .catch((err) => {
       console.log(err);
       res.set( 'Content-type', 'text/plain' );
       res.status( 400 ).send( err );
     });
-
   // const promiseTwo
       // return filter;
     // .select('exercises.id', 'exercises.notes_array')
@@ -82,5 +81,6 @@ router.get( '/users/:userId/note-score/:keyNum', ( req, res, next ) => {
 
 
 } );
+
 
 module.exports = router;
