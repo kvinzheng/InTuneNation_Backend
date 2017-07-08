@@ -63,7 +63,7 @@ router.get('/users/averagelifetimescore', (req, res, next) => {
       let averageArr = match.map( ele => { return { user_id: ele.user_id, avg_score: ele.avg_score } } );
 
       let result = average(averageArr).sort( (a,b) => { return b.avg_score - a.avg_score; } );
-      res.json(average);
+      res.json(result);
     })
     .catch((err) => {
       res.set('Content-type', 'text/plain');
