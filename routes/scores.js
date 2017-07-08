@@ -58,15 +58,11 @@ function average(arr) {
 }
 
 router.get('/users/averagelifetimescore', (req, res, next) => {
-  // console.log('get here?');
   knex('scores').join('users', 'scores.user_id', 'users.id')
-    // .where('scores.user_id', req.params.userId)
     .then((match) => {
-      // console.log('match===', match)
       let averageArr = match.map( ele => { return { user_id: ele.user_id, avg_score: ele.avg_score } } );
 
-      let result = average(averageArr);
-      console.log('result ===', result);
+      let result = average(averageArr).sort( (a,b) => { return b.avg_score - a.avg_score; } );
       res.json(average);
     })
     .catch((err) => {
