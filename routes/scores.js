@@ -39,14 +39,34 @@ router.get('/users/:userId/exercises/:exId/scores/:scId', (req, res, next) => {
     });
 });
 
+function average(arr) {
+    var sums = {}, counts = {}, results = [], user_id;
+    for (var i = 0; i < arr.length; i++) {
+        user_id = arr[i].user_id;
+        if (!(user_id in sums)) {
+            sums[user_id] = 0;
+            counts[user_id] = 0;
+        }
+        sums[user_id] += arr[i].avg_score;
+        counts[user_id]++;
+    }
 
-router.get('/users/:userId/averagelifetimescore', (req, res, next) => {
-  knex('scores')
-    .where('user_id', req.params.userId)
+    for(user_id in sums) {
+        results.push({ user_id: user_id, avg_score: sums[user_id] / counts[user_id] });
+    }
+    return results;
+}
+
+router.get('/users/averagelifetimescore', (req, res, next) => {
+  // console.log('get here?');
+  knex('scores').join('users', 'scores.user_id', 'users.id')
+    // .where('scores.user_id', req.params.userId)
     .then((match) => {
-      let averageArr = match.map( ele => { return ele.avg_score } );
-      let sum = averageArr.reduce( (acc, cur) => { return acc + cur; } );
-      let average = sum/averageArr.length;
+      // console.log('match===', match)
+      let averageArr = match.map( ele => { return { user_id: ele.user_id, avg_score: ele.avg_score } } );
+
+      let result = average(averageArr);
+      console.log('result ===', result);
       res.json(average);
     })
     .catch((err) => {

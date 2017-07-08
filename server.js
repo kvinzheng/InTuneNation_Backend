@@ -34,7 +34,7 @@ app.use(cookieParser());
 app.use(passport.initialize());
 
 const {middlewareVerify} = require('./middlewares/verifications.js');
-app.use('/users', middlewareVerify);
+// app.use('/users', middlewareVerify);
 //app.user(users) only apply for login & sign up & get all user
 
 //this doesn't apply the middlewares;
