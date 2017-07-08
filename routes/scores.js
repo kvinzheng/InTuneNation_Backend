@@ -55,7 +55,7 @@ function average(arr) {
         sums[user_id] += arr[i].avg_score;
         counts[user_id]++;
     }
-    
+
     for(user_id in sums) {
         results.push({ user_id: user_id, avg_score: sums[user_id] / counts[user_id] , first_name: user_profile[user_id]['first_name'] , profile_picture: user_profile[user_id]['profile_picture']});
     }
@@ -64,7 +64,7 @@ function average(arr) {
 
 router.get('/users/averagelifetimescore', (req, res, next) => {
   // console.log('here?');
-  knex('scores').join('users', 'scores.user_id', 'users.id')
+  knex('scores').fullOuterJoin('users', 'scores.user_id', 'users.id')
     .then((match) => {
       let averageArr = match.map( ele => { return { user_id: ele.user_id, avg_score: ele.avg_score, first_name: ele.first_name, profile_picture: ele.profile_picture } } );
       // console.log('what is averageArr',averageArr);
