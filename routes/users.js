@@ -85,6 +85,7 @@ router.post('/user/login', ev(validations.post),(req, res, next) => {
     delete authUser.updatedAt;
     authUser.token = token;
     res.set('token', token);
+    console.log('what is authUser', authUser);
     res.send(authUser);
   }).catch((err) => {
     res.status(400).send('Invalid email or password.');
