@@ -18,18 +18,6 @@ const router = express.Router();
 //validations
 const ev = require('express-validation');
 const validations = require('../validations/users.js');
-// console.log('what is validations', validations);
-// router.post('/users/login', middlewareVerify);
-// router.post('/user/signup', middlewareVerify);
-
-// require( '../config/passport' )( passport );
-
-// passport.serializeUser( (user, done ) => {
-//   done( null, user );
-// });
-// passport.deserializeUser( ( obj, done ) => {
-//   done( null, obj );
-// });
 
 // See all user information
 router.get( '/user', ( req, res, next ) => {
@@ -129,7 +117,6 @@ router.post( '/user/signup', ev(validations.post), ( req, res, next ) => {
       const token = jwt.sign( claim, process.env.JWT_KEY, {
         expiresIn: '7 days'
       });
-
       // res.cookie('token', token, {
       //   httpOnly: true,
       //   expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), // 7 days
