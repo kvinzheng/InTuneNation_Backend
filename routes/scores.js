@@ -39,44 +39,6 @@ router.get('/users/:userId/exercises/:exId/scores/:scId', (req, res, next) => {
     });
 });
 
-function average(arr) {
-    var sums = {}, counts = {}, results = [], user_id, first_name, profile_picture, user_profile = {} ;
-    for (var i = 0; i < arr.length; i++) {
-        user_id = arr[i].user_id;
-        first_name = arr[i].first_name;
-        profile_picture = arr[i].profile_picture;
-
-        user_profile[user_id] = { first_name, profile_picture };
-
-        if (!(user_id in sums)) {
-            sums[user_id] = 0;
-            counts[user_id] = 0;
-        }
-        sums[user_id] += arr[i].avg_score;
-        counts[user_id]++;
-    }
-
-    for(user_id in sums) {
-        results.push({ user_id: user_id, avg_score: sums[user_id] / counts[user_id] , first_name: user_profile[user_id]['first_name'] , profile_picture: user_profile[user_id]['profile_picture']});
-    }
-    return results;
-}
-
-router.get('/users/averagelifetimescore', (req, res, next) => {
-  // console.log('here?');
-  knex('scores').fullOuterJoin('users', 'scores.user_id', 'users.id')
-    .then((match) => {
-      let averageArr = match.map( ele => { return { user_id: ele.user_id, avg_score: ele.avg_score, first_name: ele.first_name, profile_picture: ele.profile_picture } } );
-      // console.log('what is averageArr',averageArr);
-      let result = average(averageArr).sort( (a,b) => { return b.avg_score - a.avg_score; } );
-      res.json(result);
-    })
-    .catch((err) => {
-      res.set('Content-type', 'text/plain');
-      res.status(400).send('Invalid Input');
-    });
-});
-
 // User can post new score combinations (and average score of the new score combination) to a particular exercise type.
 router.post('/users/:userId/exercises/:exId/scores', ev(validations.post),(req, res, next) => {
   knex('scores')
