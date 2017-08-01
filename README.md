@@ -11,9 +11,9 @@ Backend contains endpoint routes for user accounts, user exercises, and user sco
 
 Our app is currently built entirely with Javascript, and the back-end is built with Node.js Express server. We also rely on a few other pieces of technology, including but not limited to:
 * [Google-Oauth](http://passportjs.org/docs) (Google Passport 2.0 OAuth Technologies allow user to sign in through google's account)
-* [Json-Web-Token] (https://www.npmjs.com/package/jsonwebtoken) (Json-Web-Token allows our server to verify if the users have the web token that we assigned to them with our unique JWT key)
-* [body-parser] (https://www.npmjs.com/package/body-parser)(Parse incoming request bodies in a middleware before your handlers)
-* [knex] (http://knexjs.org/) (http://knexjs.org/)(Knex.js is a SQL query builder for Postgres)
+* [Json-Web-Token](https://www.npmjs.com/package/jsonwebtoken) (Json-Web-Token allows our server to verify if the users have the web token that we assigned to them with our unique JWT key)
+* [body-parser](https://www.npmjs.com/package/body-parser)(Parse incoming request bodies in a middleware before your handlers)
+* [knex](http://knexjs.org/) (http://knexjs.org/)(Knex.js is a SQL query builder for Postgres)
 
 
 ## Routes Documentation:
