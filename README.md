@@ -32,7 +32,7 @@ passport.use(new GoogleStrategy({
 ```
 
 ## Testing ##
-run ```npm test```
+In order to run our routing test, please type **run** ```npm test``` in your terminal
 
 We wrote tests to test routes, seeds, and migrations.
 * [mocha](https://mochajs.org/) (Mocha is a feature-rich Javascript testing framework running on Node.js)
