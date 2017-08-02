@@ -14,7 +14,24 @@ Our app is currently built entirely with Javascript, and the back-end is built w
 * [Json-Web-Token](https://www.npmjs.com/package/jsonwebtoken) (Json-Web-Token allows our server to verify if the users have the web token that we assigned to them with our unique JWT key)
 * [body-parser](https://www.npmjs.com/package/body-parser)(Parse incoming request bodies in a middleware before your handlers)
 * [knex](http://knexjs.org/) (http://knexjs.org/)(Knex.js is a SQL query builder for Postgres)
+* [bcrypt](https://www.npmjs.com/package/bcrypt-as-promised)(bcrypt is a hashing algorithm which encrypt passport, it provides 'compare' and 'hash' functionalities)
+* [morgan](https://www.npmjs.com/package/morgan)(morgan is a middleware function using given format and options. It allows developers to view more detail of your HTTP requests)
 
+## We built a middle ware to verify authenticated user
+```Javascript
+function middlewareVerify(req, res, next) {
+  jwt.verify(req.headers.token, process.env.JWT_KEY, (err, payload) => {
+    if (err) {
+      res.status(401);
+      res.send({status: 401, ErrorMessage: 'Unauthorized'});
+    } else {
+      let tokenId = payload.userId;
+      req.claim = payload;
+      next();
+    }
+  });
+}
+```
 
 ## Routes Documentation:
 
@@ -26,12 +43,13 @@ Response:
 ```
 [
   {
-    id: [integer],
-    first_name: [string],
-    last_name: [string],
-    email: [string],
-    created_at: [timestamp],
-    updated_at: [timestamp]
+    id: integer,
+    first_name: string,
+    last_name: string,
+    email: string,
+    profile_picture: string,
+    created_at: timestamp,
+    updated_at: timestamp,
   }
 ]
 ```
@@ -43,21 +61,22 @@ Response:
 Body:
 ```
 {
-  first_name: [string],
-  last_name: [string],
-  email: [string],
-  password: [string]
+  firstName: string,
+  lastName: string,
+  email: string,
+  password: string
 }
 ```
+
 Response:
 ```
 {
-  id: [integer],
-  first_name: [string],
-  last_name: [string],
-  email: [string],
-  created_at: [timestamp],
-  updated_at: [timestamp]
+  id: integer,
+  first_name: string,
+  last_name: string,
+  email: string,
+  profilePicture: string,
+  token: string
 }
 ```
 
@@ -68,20 +87,20 @@ Response:
 Body:
 ```
 {
-  email: [string],
-  password: [string]
+  email: string,
+  password: string
 }
 ```
 
 Response:
 ```
 {
-  id: [integer],
-  first_name: [string],
-  last_name: [string],
-  email: [string],
-  created_at: [timestamp],
-  updated_at: [timestamp]
+  id: integer,
+  firstName: string,
+  lastName: string,
+  email: string,
+  profilePicture: string,
+  token: string
 }
 ```
 
@@ -89,16 +108,22 @@ Response:
 
 `GET /users/:userId/exercises`
 
+Request Header:
+```
+token: string
+```
+
 Response:
 ```
 [
   {
-    id: [integer],
-    user_id: [integer],
-    notes_array: [string]
-    created_at: [timestamp],
-    updated_at: [timestamp]
-  }
+    id: integer,
+    user_id: integer,
+    notes_array: string
+    created_at: timestamp,
+    updated_at: timestamp
+  },
+  ...
 ]
 ```
 
@@ -106,14 +131,20 @@ Response:
 
 `GET /users/:userId/exercises/:exId`
 
+Request Header:
+```
+token: string
+```
+
+
 Response:
 ```
 {
-  id: [integer],
-  user_id: [integer],
-  notes_array: [string]
-  created_at: [timestamp],
-  updated_at: [timestamp]
+  id: integer,
+  user_id: integer,
+  notes_array: string,
+  created_at: timestamp,
+  updated_at: timestamp
 }
 ```
 
@@ -121,19 +152,25 @@ Response:
 
 `POST /users/:userId/exercises`
 
+Request Header:
+```
+token: string
+```
+
+
 Body:
 ```
 {
-  notes_array: [array]
+  notes_array: array
 }
 ```
 
 Response:
 ```
 {
-  id: [integer],
-  user_id: [integer],
-  notes_array: [string]
+  id: integer,
+  user_id: integer,
+  notes_array: string
 }
 ```
 
@@ -141,16 +178,22 @@ Response:
 
 `GET /users/:userId/exercises/:exId/scores`
 
+Request Header:
+```
+token: string
+```
+
+
 Response:
 ```
 [
   {
-    id: [integer],
-    user_id: [integer],
-    scores_array: [string],
-    avg_score: [float],
-    created_at: [timestamp],
-    updated_at: [timestamp]
+    id: integer,
+    user_id: integer,
+    scores_array: string,
+    avg_score: float,
+    created_at: timestamp,
+    updated_at: timestamp
   }
 ]
 ```
@@ -159,15 +202,20 @@ Response:
 
 `GET /users/:userId/exercises/:exId/scores/:scId`
 
+Request Header:
+```
+token: string
+```
+
 Response:
 ```
 {
-  id: [integer],
-  user_id: [integer],
-  scores_array: [string],
-  avg_score: [float],
-  created_at: [timestamp],
-  updated_at: [timestamp]
+  id: integer,
+  user_id: integer,
+  scores_array: string,
+  avg_score: float,
+  created_at: timestamp,
+  updated_at: timestamp
 }
 ```
 
@@ -175,26 +223,33 @@ Response:
 
 `router.post(‘/users/:userId/exercises/:exId/scores’)`
 
+Request Header:
+```
+token: string
+```
+
 Body:
 ```
 {
-  scores_array: [array],
-  avg_score: [float]
+  scores_array: array,
+  avg_score: float
 }
 ```
 
 Response:
 ```
 {
-  id: [integer],
-  user_id: [integer],
-  scores_array: [string],
-  avg_score: [float]
+  id: integer,
+  user_id: integer,
+  scores_array: string,
+  avg_score: float
 }
 ```
 
 **Error Responses**
 
 400: `Invalid Input`
+
+401: `Unauthorized`
 
 404: `Not Found`
