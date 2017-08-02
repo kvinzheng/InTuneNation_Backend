@@ -32,6 +32,8 @@ passport.use(new GoogleStrategy({
 ```
 
 ## Testing ##
+run ```npm test```
+
 We wrote tests to test routes, seeds, and migrations.
 * [mocha](https://mochajs.org/) (Mocha is a feature-rich Javascript testing framework running on Node.js)
 * [chai](http://chaijs.com/) (Chai is a BDD / TDD assertion library for node and the browser that can be delightfully paired with any javascript testing framework.)
