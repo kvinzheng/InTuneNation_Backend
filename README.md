@@ -1,4 +1,4 @@
-# Invervalicity [Backend]
+# IntuneNation BackEnd #
 
 This is the backend repository for our Intervalicity application and is deployed at https://ppp-capstone-music.herokuapp.com/ as the root.
 
@@ -39,7 +39,7 @@ We wrote tests to test routes, seeds, and migrations.
 * [chai](http://chaijs.com/) (Chai is a BDD / TDD assertion library for node and the browser that can be delightfully paired with any javascript testing framework.)
 * [supertest](https://www.npmjs.com/package/supertest) (SuperTest is a module that provides high-level abstraction for testing HTTP in node.js.)
 
-## We built a middle ware to verify authenticated user
+## We built a middleware to verify an authenticated user
 ```Javascript
 function middlewareVerify(req, res, next) {
   jwt.verify(req.headers.token, process.env.JWT_KEY, (err, payload) => {
