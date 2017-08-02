@@ -1,6 +1,6 @@
 # InTuneNation [BackEnd] #
 
-This is the backend repository for our Intervalicity application and is deployed at https://ppp-capstone-music.herokuapp.com/ as the root.
+This is the backend repository for our InTuneNation application and is deployed at https://ppp-capstone-music.herokuapp.com/ as the root. This backend was built with the Node.js Express framework and postgres database.
 
 ## Entity Relationship Diagram
 ![Entity Relationship Diagram](https://image.ibb.co/ighMPk/In_Tune_Nation_ERD.jpg)
