@@ -268,7 +268,7 @@ Response:
 }
 ```
 
-**Error Responses**
+## Error Responses ##
 
 400: `Invalid Input`
 
