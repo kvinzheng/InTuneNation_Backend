@@ -38,7 +38,7 @@ exports.seed = function (knex, Promise) {
       },
       {
         id: 6,
-        user_id: 3,
+        user_id: 1,
         notes_array: '[37,35,39]',
         created_at: new Date('2016-06-29 14:26:16 UTC'),
         updated_at: new Date('2016-06-29 14:26:16 UTC'),
