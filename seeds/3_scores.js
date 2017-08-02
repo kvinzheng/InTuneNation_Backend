@@ -84,7 +84,7 @@ exports.seed = function (knex, Promise) {
       },
       {
         id: 10,
-        user_id: 3,
+        user_id: 1,
         exercises_id: 6,
         scores_array: '[88,82,78]',
         avg_score: 82.67,
@@ -93,7 +93,7 @@ exports.seed = function (knex, Promise) {
       },
       {
         id: 11,
-        user_id: 3,
+        user_id: 1,
         exercises_id: 6,
         scores_array: '[91,83,86]',
         avg_score: 86.67,
@@ -102,7 +102,7 @@ exports.seed = function (knex, Promise) {
       },
       {
         id: 12,
-        user_id: 3,
+        user_id: 1,
         exercises_id: 6,
         scores_array: '[79,87,78]',
         avg_score: 81.33,
@@ -111,7 +111,7 @@ exports.seed = function (knex, Promise) {
       },
       {
         id: 13,
-        user_id: 3,
+        user_id: 1,
         exercises_id: 6,
         scores_array: '[68,82,73]',
         avg_score: 74.33,
