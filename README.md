@@ -14,12 +14,12 @@ Backend contains endpoint routes for user accounts, user exercises, and user sco
 Our app is currently built entirely with Javascript, and the back-end is built with Node.js Express server. We also rely on a few other pieces of technology, including but not limited to:
 * [Google-Oauth](http://passportjs.org/docs) (Google Passport 2.0 OAuth Technologies allow user to sign in through google's account)
 * [Json-Web-Token](https://www.npmjs.com/package/jsonwebtoken) (Json-Web-Token allows our server to verify if the users have the web token that we assigned to them with our unique JWT key)
-* [Request Body-parser](https://www.npmjs.com/package/Request Body-parser)(Parse incoming request bodies in a middleware before your handlers)
-* [knex](http://knexjs.org/) (http://knexjs.org/)(Knex.js is a SQL query builder for Postgres)
-* [bcrypt](https://www.npmjs.com/package/bcrypt-as-promised)(bcrypt is a hashing algorithm which encrypt passport, it provides 'compare' and 'hash' functionalities)
-* [morgan](https://www.npmjs.com/package/morgan)(morgan is a middleware function using given format and options. It allows developers to view more detail of your HTTP requests)
+* [body-parser](https://www.npmjs.com/package/body-parser-json) (Parse incoming request bodies in a middleware before your handlers)
+* [knex](http://knexjs.org/) (Knex.js is a SQL query builder for Postgres)
+* [bcrypt](https://www.npmjs.com/package/bcrypt-as-promised) (bcrypt is a hashing algorithm which encrypt passport, it provides 'compare' and 'hash' functionalities)
+* [morgan](https://www.npmjs.com/package/morgan) (morgan is a middleware function using given format and options. It allows developers to view more detail of your HTTP requests)
 
-##Google OAuth
+## Google OAuth ##
 I make an new instance of GoogleStrategy using 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', and 'CALL_BACK_URL'. You can obtain those information from your Google plus account. after Google successfully verify your information, it would give me back your profile information in an object form. Then, that is how I would display your information on the screen.
 
 ```javascript
@@ -33,11 +33,11 @@ passport.use(new GoogleStrategy({
 }));
 ```
 
-## Testing **
+## Testing ##
 We wrote tests to test routes, seeds, and migrations.
-* [mocha](https://mochajs.org/)(Mocha is a feature-rich Javascript testing framework running on Node.js)
-* [chai](http://chaijs.com/)(Chai is a BDD / TDD assertion library for node and the browser that can be delightfully paired with any javascript testing framework.)
-* [super test](https://www.npmjs.com/package/supertest)(SuperTest is a module that provides high-level abstraction for testing HTTP in node.js.)
+* [mocha](https://mochajs.org/) (Mocha is a feature-rich Javascript testing framework running on Node.js)
+* [chai](http://chaijs.com/) (Chai is a BDD / TDD assertion library for node and the browser that can be delightfully paired with any javascript testing framework.)
+* [supertest](https://www.npmjs.com/package/supertest) (SuperTest is a module that provides high-level abstraction for testing HTTP in node.js.)
 
 ## We built a middle ware to verify authenticated user
 ```Javascript
