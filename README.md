@@ -1,8 +1,6 @@
-# IntuneNation BackEnd #
+# InTuneNation [BackEnd] #
 
 This is the backend repository for our Intervalicity application and is deployed at https://ppp-capstone-music.herokuapp.com/ as the root.
-
-Backend contains endpoint routes for user accounts, user exercises, and user scores. Token verification is required to access `/users` routes. Token is assigned upon signup and login and must be passed through the header request. All successful responses are returned in JSON format. Failed responses are returned in plain text. `:userId` , `:exId` , & `:scId` must be replaced with integers when making a backend API request.
 
 ## Entity Relationship Diagram
 ![Entity Relationship Diagram](https://image.ibb.co/ighMPk/In_Tune_Nation_ERD.jpg)
@@ -56,6 +54,8 @@ function middlewareVerify(req, res, next) {
 ```
 
 ## Routes Documentation:
+
+Backend contains endpoint routes for user accounts, user exercises, and user scores. Token verification is required to access `/users` routes. Token is assigned upon signup and login and must be passed through the header request. All successful responses are returned in JSON format. Failed responses are returned in plain text. `:userId` , `:exId` , & `:scId` must be replaced with integers when making a backend API request.
 
 **Show all users**
 
