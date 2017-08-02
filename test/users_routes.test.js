@@ -108,15 +108,6 @@ describe('POST /user/login', () => {
     email: 'parklewis@gmail.com'
   };
 
-  // it('sucessfully logs in user', done => {
-  //   request(server)
-  //     .post('/users/login')
-  //     .send(logInUser)
-  //     .expect('Content-Type', /json/)
-  //     .end(done);
-  //   });
-  //
-
   it('adds the user is in the data base as well', done => {
     request(server)
     .post('/user/login')
@@ -136,8 +127,6 @@ describe('POST /user/login', () => {
   });
 });
 
-
-
 describe('POST /user/signup', () => {
   const newUser = {
     firstName: 'Matt',
@@ -150,19 +139,20 @@ describe('POST /user/signup', () => {
     id: 9,
     firstName: 'Matt',
     lastName: 'Murr',
-    email: 'mattmurr@gmail.com'
+    email: 'mattmurr@gmail.com',
+    profilePicture: ""
   };
+
   it('sucessfully creates a new user', done => {
     request(server)
       .post('/user/signup')
       .send(newUser)
       .expect((res) => {
-        // console.log('what is res in signup', res.body);
+        delete res.body.token;
       })
-      .expect(expectedUser)
-      .expect('set-cookie', /token=[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+; Path=\/;.+HttpOnly/)
       .expect('Content-Type', /json/)
-      .expect(200, done);
+      .expect(200, done)
+      .expect(expectedUser);
   });
 
   it('adds the newUser to the database', done => {

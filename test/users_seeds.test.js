@@ -30,7 +30,9 @@ afterEach((done) => {
 describe('users seeds', () => {
 
 it('users rows', (done) => {
-  knex('users').orderBy('id', 'ASC')
+  knex.select('id', 'first_name', 'last_name', 'email', 'profile_picture', 'created_at', 'updated_at')
+  .from('users')
+  .orderBy('id', 'ASC')
   .then((actual) => {
     const expected = [
       {
@@ -38,36 +40,36 @@ it('users rows', (done) => {
         first_name: 'Bob',
         last_name: 'Saget',
         email: 'bobsaget@gmail.com',
-        hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud8ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
-        created_at: new Date('2016-06-29 14:26:16 UTC'),
-        updated_at: new Date('2016-06-29 14:26:16 UTC'),
+        "profile_picture": "https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png",
+        created_at: new Date('2016-06-21 14:26:16 UTC'),
+        updated_at: new Date('2016-06-21 14:26:16 UTC'),
       },
       {
         id: 2,
         first_name: 'Kevin',
         last_name: 'Zheng',
         email: 'kvinzheng@gmail.com',
-        hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud3ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
-        created_at: new Date('2016-06-29 14:26:16 UTC'),
-        updated_at: new Date('2016-06-29 14:26:16 UTC'),
+        "profile_picture": "https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png",
+        created_at: new Date('2016-06-22 14:26:16 UTC'),
+        updated_at: new Date('2016-06-22 14:26:16 UTC'),
       },
       {
         id: 3,
         first_name: 'Reid',
         last_name: 'Delahunt',
         email: 'reidpierredelahunt@gmail.com',
-        hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud5ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
-        created_at: new Date('2016-06-29 14:26:16 UTC'),
-        updated_at: new Date('2016-06-29 14:26:16 UTC'),
+        "profile_picture": "https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png",
+        created_at: new Date('2016-06-23 14:26:16 UTC'),
+        updated_at: new Date('2016-06-23 14:26:16 UTC'),
       },
       {
         id: 4,
         first_name: 'Marty',
         last_name: 'Yee',
         email: 'martytheemartian@yahoo.com',
-        hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
-        created_at: new Date('2016-06-29 14:26:16 UTC'),
-        updated_at: new Date('2016-06-29 14:26:16 UTC'),
+        "profile_picture": "https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png",
+        created_at: new Date('2016-06-24 14:26:16 UTC'),
+        updated_at: new Date('2016-06-24 14:26:16 UTC'),
       }];
       for( let i = 0; i < expected.length; i++){
         assert.deepEqual(
