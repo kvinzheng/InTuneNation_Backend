@@ -88,10 +88,10 @@ router.get('/auth/google/success', (req, res, next) => {
     result.token = token;
 
     let string = encodeURIComponent(JSON.stringify(result));
-    res.redirect('http://localhost:3000/interface/?' + string);
+    res.redirect('https://intunenation.herokuapp.com/interface/?' + string);
   });
-
 });
+
 router.get('/auth/google/failure', (req, res, next) => {
   return res.json('user is not authenticated yet');
 });
