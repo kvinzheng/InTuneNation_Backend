@@ -32,7 +32,7 @@ passport.use(new GoogleStrategy({
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: process.env.CALL_BACK_URL,
   passReqToCallback: true
-}, function(request, accessToken, refreshToken, profile, done) {
+}, function (request, accessToken, refreshToken, profile, done) {
   newUser = {
     first_name: profile.name.givenName,
     last_name: profile.name.familyName,
