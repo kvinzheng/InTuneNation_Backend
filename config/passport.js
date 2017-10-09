@@ -10,18 +10,18 @@ const app = express();
 const morgan = require('morgan');
 const router = express.Router();
 const queryString = require('query-string');
-const jwt = require( 'jsonwebtoken' );
+const jwt = require('jsonwebtoken');
 
 if (app.get('env') === 'development') {
   app.use(morgan('dev'));
 }
 app.use(passport.session());
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function(obj, done) {
+passport.deserializeUser(function (obj, done) {
   done(null, obj);
 });
 
@@ -57,22 +57,22 @@ passport.use(new GoogleStrategy({
 router.use(session({
   secret: 'cookie_secret',
   name: 'kaas',
-  store: new RedisStore({host: '127.0.0.1', port: 6379}),
+  store: new RedisStore({ host: '127.0.0.1', port: 6379 }),
   proxy: true,
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
 }));
 
 router.use(passport.initialize());
 router.use(passport.session());
 
 router.get('/auth/google', passport.authenticate('google', {
-  scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.profile.emails.read']
+  scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.profile.emails.read'],
 }));
 
 router.get('/auth/google/callback', passport.authenticate('google', {
   successRedirect: '/auth/google/success',
-  failureRedirect: '/auth/google/failure'
+  failureRedirect: '/auth/google/failure',
 }));
 
 router.get('/auth/google/success', (req, res, next) => {
@@ -82,9 +82,9 @@ router.get('/auth/google/success', (req, res, next) => {
     let claim = {
       userId: result.id
     };
-    let token = jwt.sign( claim, process.env.JWT_KEY, {
+    let token = jwt.sign(claim, process.env.JWT_KEY, {
       expiresIn: '7 days'
-    } );
+    });
     result.token = token;
 
     let string = encodeURIComponent(JSON.stringify(result));
@@ -97,5 +97,5 @@ router.get('/auth/google/failure', (req, res, next) => {
 });
 
 module.exports = {
-  googleRouter: router
+  googleRouter: router,
 };

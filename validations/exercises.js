@@ -5,5 +5,5 @@ module.exports.post = {
     notes_array: Joi.array()
       .label('an array of notes')
       .required(),
-  }
+  },
 };

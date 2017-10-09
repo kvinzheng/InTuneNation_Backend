@@ -3,9 +3,8 @@ this could be done in a much more concise way if you split the tasks of calculat
 the octaves and notes up into seperate functions.
 */
 
-function getNoteAndOctave( keyNum ) {
-
-  let noteObj = {};
+function getNoteAndOctave(keyNum) {
+  const noteObj = {};
   if (keyNum >= 28 && keyNum <= 39) {
     noteObj['octave'] = 3;
   }
@@ -19,7 +18,6 @@ function getNoteAndOctave( keyNum ) {
 
   noteObj['note', notesArray[keyNum % 12]];
   return noteObj;
-
-}
+};
 
 module.exports = getNoteAndOctave;

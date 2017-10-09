@@ -4,7 +4,7 @@ function middlewareVerify(req, res, next) {
   jwt.verify(req.headers.token, process.env.JWT_KEY, (err, payload) => {
     if (err) {
       res.status(401);
-      res.send({status: 401, ErrorMessage: 'Unauthorized'});
+      res.send({ status: 401, ErrorMessage: 'Unauthorized' });
     } else {
       let tokenId = payload.userId;
       req.claim = payload;

@@ -6,6 +6,6 @@ module.exports.post = {
       .label('an array of score')
       .required(),
     avg_score: Joi.number()
-      .required()
-  }
+      .required(),
+  },
 };

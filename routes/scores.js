@@ -27,7 +27,7 @@ router.get('/users/:userId/exercises/:exId/scores/:scId', (req, res, next) => {
     .where({
       id: req.params.scId,
       user_id: req.params.userId,
-      exercises_id: req.params.exId
+      exercises_id: req.params.exId,
     })
     .first()
     .then((user_score) => {
@@ -40,13 +40,13 @@ router.get('/users/:userId/exercises/:exId/scores/:scId', (req, res, next) => {
 });
 
 // User can post new score combinations (and average score of the new score combination) to a particular exercise type.
-router.post('/users/:userId/exercises/:exId/scores', ev(validations.post),(req, res, next) => {
+router.post('/users/:userId/exercises/:exId/scores', ev(validations.post), (req, res, next) => {
   knex('scores')
     .insert({
       user_id: req.params.userId,
       exercises_id: req.params.exId,
       scores_array: JSON.stringify(req.body.scores_array),
-      avg_score: req.body.avg_score
+      avg_score: req.body.avg_score,
     }, '*')
     .then((user_scores) => {
       delete user_scores[0].created_at;
