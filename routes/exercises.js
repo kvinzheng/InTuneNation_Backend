@@ -1,8 +1,9 @@
 const express = require('express');
 const knex = require('../knex');
+
 const router = express.Router();
 
-//validations
+// validations
 const ev = require('express-validation');
 const validations = require('../validations/exercises.js');
 
@@ -16,6 +17,7 @@ router.get('/users/:userId/exercises', (req, res, next) => {
     .catch((err) => {
       res.set('Content-type', 'text/plain');
       res.status(404).send('Not Found');
+      next(err);
     });
 });
 
@@ -33,24 +35,24 @@ router.get('/users/:userId/exercises/:exId', (req, res, next) => {
     .catch((err) => {
       res.set('Content-type', 'text/plain');
       res.status(404).send('Not Found');
+      next(err);
     });
 });
 
-//insert exercises
+// insert exercises
 router.post('/users/:userId/exercises', ev(validations.post), (req, res, next) => {
   knex('exercises')
     .where('notes_array', '=', JSON.stringify(req.body.notes_array))
     .where('user_id', req.params.userId)
     .first()
     .then((match) => {
-      if(match) {
+      if (match) {
         res.json(match);
-      }
-      else {
+      } else {
         knex('exercises')
           .insert({
             user_id: req.params.userId,
-            notes_array: JSON.stringify(req.body.notes_array)
+            notes_array: JSON.stringify(req.body.notes_array),
           }, '*')
           .then((user_exercise) => {
             delete user_exercise[0].created_at;
@@ -62,9 +64,8 @@ router.post('/users/:userId/exercises', ev(validations.post), (req, res, next) =
     .catch((err) => {
       res.set('Content-type', 'text/plain');
       res.status(400).send('Invalid Input');
+      next(err);
     });
 });
-
-
 
 module.exports = router;

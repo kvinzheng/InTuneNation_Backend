@@ -1,14 +1,13 @@
 process.env.NODE_ENV = 'test';
 
-const request = require('supertest');
-const { expect, assert } = require('chai');
+const { assert } = require('chai');
 const knex = require('../knex');
 
 beforeEach( done => {
   knex.migrate.latest()
   .then(() => {
       done();
-    })
+  })
   .catch((err) => {
     done(err);
   });
@@ -31,49 +30,47 @@ describe('exercises migrations', () => {
           type: 'integer',
           maxLength: null,
           nullable: false,
-          defaultValue: 'nextval(\'exercises_id_seq\'::regclass)'
+          defaultValue: 'nextval(\'exercises_id_seq\'::regclass)',
         },
 
         user_id: {
           type: 'integer',
           maxLength: null,
           nullable: false,
-          defaultValue: null
+          defaultValue: null,
         },
 
         notes_array: {
           type: 'character varying',
           maxLength: 255,
           nullable: false,
-          defaultValue: '\'[]\'::character varying'
+          defaultValue: '\'[]\'::character varying',
         },
 
         created_at: {
           type: 'timestamp with time zone',
           maxLength: null,
           nullable: false,
-          defaultValue: 'now()'
+          defaultValue: 'now()',
         },
 
         updated_at: {
           type: 'timestamp with time zone',
           maxLength: null,
           nullable: false,
-          defaultValue: 'now()'
-        }
+          defaultValue: 'now()',
+        },
       };
 
         for(const column in expected) {
-          // expect(actual[column].to.equal(expected[column]));
           assert.deepEqual(
             actual[column],
             expected[column],
-            `Column ${column} is not the same`
+            `Column ${column} is not the same`,
           );
         }
-
-        done();
-      })
+      done();
+    })
       .catch((err) => {
         done(err);
       });

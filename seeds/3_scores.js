@@ -1,5 +1,6 @@
 exports.seed = function (knex, Promise) {
-  return knex('scores').del().then(() => {
+  return knex('scores').del()
+  .then(() => {
     return knex('scores').insert([
       {
         id: 1,
@@ -183,7 +184,8 @@ exports.seed = function (knex, Promise) {
       }
 
     ]);
-  }).then(() => {
+  })
+  .then(() => {
     return knex.raw("SELECT setval('scores_id_seq', (SELECT MAX(id) FROM scores));");
   });
 };

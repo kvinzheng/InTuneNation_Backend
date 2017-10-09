@@ -12,12 +12,11 @@ const morgan = require('morgan');
 
 const app = express();
 const user = require('./routes/users');
-const configAuth = require('./config/auth');
+
 const exercises = require('./routes/exercises');
 const scores = require('./routes/scores');
 const noteScore = require('./routes/noteScore');
-const {googleRouter} = require('./config/passport.js');
-const knex = require('./knex');
+const { googleRouter } = require('./config/passport.js');
 
 app.disable('x-powered-by');
 
@@ -29,15 +28,15 @@ app.use(cors());
 app.options('*', cors());
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(passport.initialize());
 
-const {middlewareVerify} = require('./middlewares/verifications.js');
+const { middlewareVerify } = require('./middlewares/verifications.js');
 app.use('/users', middlewareVerify);
-//app.user(users) only apply for login & sign up & get all user
+// app.user(users) only apply for login & sign up & get all user
 
-//this doesn't apply the middlewares;
+// this doesn't apply the middlewares;
 app.use(googleRouter); //applying google OAuth Routes
 app.use(user);
 app.use(exercises);

@@ -1,16 +1,15 @@
 // eslint-space-in-parens
-const passport = require('passport');
 const bcrypt = require('bcrypt-as-promised');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const knex = require('../knex');
 const bodyParser = require('body-parser');
-const { camelizeKeys, decamelizeKeys } = require('humps');
+const { camelizeKeys } = require('humps');
 const { middlewareVerify } = require('../middlewares/verifications.js');
 
 const router = express.Router();
 
-//validations
+// validations
 const ev = require('express-validation');
 const validations = require('../validations/users.js');
 
@@ -101,7 +100,7 @@ router.post('/user/signup', ev(validations.post), (req, res, next) => {
       return knex('users').insert((newUser), '*');
     })
     .then((insertedUser) => {
-      let camelizedUser = camelizeKeys(insertedUser[0]);
+      const camelizedUser = camelizeKeys(insertedUser[0]);
       const claim = {
         userId: camelizedUser.id,
       };

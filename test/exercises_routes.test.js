@@ -7,11 +7,10 @@ const knex = require('../knex.js');
 
 
 describe('GET /users/:userId/exercises', () => {
-
   it('responds with 200 & JSON', done => {
     request(server)
     .get('/users/4/exercises')
-    .set({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTQ5ODYwNjcxNSwiZXhwIjoxNDk5MjExNTE1fQ.fxkzG2Ig6BZplqwu0qvZd6QscrJLDyFCqQo8y343QIU"})
+    .set({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTQ5ODYwNjcxNSwiZXhwIjoxNDk5MjExNTE1fQ.fxkzG2Ig6BZplqwu0qvZd6QscrJLDyFCqQo8y343QIU" })
     .expect('Content-type', /json/)
     .expect(200, done);
   });
@@ -20,7 +19,7 @@ describe('GET /users/:userId/exercises', () => {
     request(server)
     .get('/users/4/exercises')
     .set({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTQ5ODYwNjcxNSwiZXhwIjoxNDk5MjExNTE1fQ.fxkzG2Ig6BZplqwu0qvZd6QscrJLDyFCqQo8y343QIU"})
-    .end( (err, res ) => {
+    .end((err, res) => {
       expect(res.body).to.deep.equal([
         {
           id: 19,
@@ -102,7 +101,7 @@ describe('POST /users/:userId/exercises', () => {
   it('should verify that the new entry is now inside the database', done => {
     request(server)
       .post('/users/4/exercises')
-      .set({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTQ5ODYwNjcxNSwiZXhwIjoxNDk5MjExNTE1fQ.fxkzG2Ig6BZplqwu0qvZd6QscrJLDyFCqQo8y343QIU"})
+      .set({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTQ5ODYwNjcxNSwiZXhwIjoxNDk5MjExNTE1fQ.fxkzG2Ig6BZplqwu0qvZd6QscrJLDyFCqQo8y343QIU" })
       .send(exercise)
       .end((err, res) => {
         knex('exercises')
@@ -114,6 +113,5 @@ describe('POST /users/:userId/exercises', () => {
             done();
           });
       });
-    });
-
+  });
 });

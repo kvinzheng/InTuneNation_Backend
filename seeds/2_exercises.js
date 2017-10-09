@@ -1,5 +1,6 @@
 exports.seed = function (knex, Promise) {
-  return knex('exercises').del().then(() => {
+  return knex('exercises').del()
+  .then(() => {
     return knex('exercises').insert([
       {
         id: 1,
@@ -143,7 +144,8 @@ exports.seed = function (knex, Promise) {
       }
 
     ]);
-  }).then(() => {
+  })
+  .then(() => {
     return knex.raw("SELECT setval('exercises_id_seq', (SELECT MAX(id) FROM exercises));");
   });
 };

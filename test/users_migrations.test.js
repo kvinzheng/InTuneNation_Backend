@@ -82,12 +82,11 @@ describe('users migrations', () => {
           assert.deepEqual(
             actual[column],
             expected[column],
-            `Column ${column} is not the same`
+            `Column ${column} is not the same`,
           );
         }
-
-        done();
-      })
+      done();
+    })
       .catch((err) => {
         done(err);
       });

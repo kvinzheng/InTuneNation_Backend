@@ -1,10 +1,10 @@
 process.env.NODE_ENV = 'test';
 
 const request = require('supertest');
-const { expect, assert } = require('chai');
+const { assert } = require('chai');
 const knex = require('../knex');
 
-beforeEach( done => {
+beforeEach(done => {
   knex.migrate.latest()
   .then(() => {
       done();
@@ -14,7 +14,7 @@ beforeEach( done => {
   });
 });
 
-afterEach( done => {
+afterEach(done => {
   knex.migrate.rollback()
   .then(() => {
     done();
@@ -71,16 +71,14 @@ describe('scores migrations', () => {
       };
 
         for(const column in expected) {
-          // expect(actual[column].to.equal(expected[column]));
           assert.deepEqual(
             actual[column],
             expected[column],
             `Column ${column} is not the same`
           );
         }
-
-        done();
-      })
+      done();
+    })
       .catch((err) => {
         done(err);
       });

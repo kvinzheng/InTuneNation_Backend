@@ -6,7 +6,7 @@ const server = require('../server.js');
 const knex = require('../knex.js');
 
 
-beforeEach( done => {
+beforeEach(done => {
   knex.migrate.latest()
   .then(() => {
     return knex.seed.run()
@@ -209,7 +209,6 @@ xdescribe('PUT /users/:id', () => {
   it('updates the users successfully in response only', done => {
     request(server)
     .put('/users/1')
-    // .type('form')
     .send(updatedUser)
     .send((err, res) => {
       knex('users').where('id',1).first().then( user => {
