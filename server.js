@@ -35,8 +35,8 @@ const { middlewareVerify } = require('./middlewares/verifications.js');
 
 // this apply the middlewares;
 app.use('/users', middlewareVerify);
+
 // this doesn't apply the middlewares;
-// applying google OAuth Routes
 app.use(googleRouter);
 app.use(user);
 app.use(exercises);

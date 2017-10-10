@@ -96,9 +96,8 @@ router.get('/auth/google/success', (req, res) => {
   });
 });
 
-router.get('/auth/google/failure', (req, res) => {
-  return res.json('user is not authenticated yet');
-});
+router.get('/auth/google/failure', (req, res) => res.json('user is not authenticated yet'));
+
 
 module.exports = {
   googleRouter: router,

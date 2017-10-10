@@ -18,6 +18,7 @@ router.get('/users/:userId/exercises/:exId/scores', (req, res, next) => {
     .catch((err) => {
       res.set('Content-type', 'text/plain');
       res.status(404).send('Not Found');
+      next(err);
     });
 });
 
@@ -36,6 +37,7 @@ router.get('/users/:userId/exercises/:exId/scores/:scId', (req, res, next) => {
     .catch((err) => {
       res.set('Content-type', 'text/plain');
       res.status(404).send('Not Found');
+      next(err);
     });
 });
 
@@ -56,6 +58,7 @@ router.post('/users/:userId/exercises/:exId/scores', ev(validations.post), (req,
     .catch((err) => {
       res.set('Content-type', 'text/plain');
       res.status(400).send('Invalid Input');
+      next(err);
     });
 });
 
