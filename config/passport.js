@@ -46,11 +46,13 @@ passport.use(new GoogleStrategy({
   knex('users').where('email', newUser.email).first().then((user) => {
     if (user) {
       // user exist in the user table
-      knex('users').update(newUser, '*').where('email', newUser.email).then(result => console.log('result is', result));
+      knex('users').update(newUser, '*').where('email', newUser.email)
+      .then(result => console.log('result is', result));
       return done(null, newUser);
     } else {
       // user hasn't been in the user table yet
-      knex('users').insert((newUser), '*').catch((err) => console.log('Google did not authenticate you'));
+      knex('users').insert((newUser), '*')
+      .catch((err) => console.log('Google did not authenticate you'));
       return done(null, newUser);
     }
   });

@@ -12,10 +12,9 @@ const morgan = require('morgan');
 
 const app = express();
 const user = require('./routes/users');
-
 const exercises = require('./routes/exercises');
 const scores = require('./routes/scores');
-const noteScore = require('./routes/noteScore');
+
 const { googleRouter } = require('./config/passport.js');
 
 app.disable('x-powered-by');
@@ -33,15 +32,15 @@ app.use(cookieParser());
 app.use(passport.initialize());
 
 const { middlewareVerify } = require('./middlewares/verifications.js');
-app.use('/users', middlewareVerify);
-// app.user(users) only apply for login & sign up & get all user
 
+// this apply the middlewares;
+app.use('/users', middlewareVerify);
 // this doesn't apply the middlewares;
-app.use(googleRouter); //applying google OAuth Routes
+// applying google OAuth Routes
+app.use(googleRouter);
 app.use(user);
 app.use(exercises);
 app.use(scores);
-app.use(noteScore);
 
 app.use((_req, res) => {
   res.sendStatus(404);
