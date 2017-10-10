@@ -3,9 +3,7 @@ const bcrypt = require('bcrypt-as-promised');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const knex = require('../knex');
-const bodyParser = require('body-parser');
 const { camelizeKeys } = require('humps');
-const { middlewareVerify } = require('../middlewares/verifications.js');
 
 const router = express.Router();
 
@@ -66,6 +64,7 @@ router.post('/user/login', ev(validations.post), (req, res, next) => {
   })
   .catch((err) => {
     res.status(400).send('Invalid email or password.');
+    next(err);
   });
 });
 
@@ -118,6 +117,7 @@ router.post('/user/signup', ev(validations.post), (req, res, next) => {
     })
     .catch((error) => {
       res.status(400).send('Invalid Input.');
+      next(error);
     });
   }
 });

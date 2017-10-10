@@ -25,7 +25,7 @@ router.get('/users/:userId/exercises/:exId', (req, res, next) => {
   knex('exercises')
     .where({
       id: req.params.exId,
-      user_id: req.params.userId
+      user_id: req.params.userId,
     })
     .first()
     .then((user_exercise) => {
