@@ -15,10 +15,9 @@ router.get('/users/:userId/exercises/:exId/scores', (req, res, next) => {
     .then((user_scores) => {
       res.json(user_scores);
     })
-    .catch((err) => {
+    .catch(() => {
       res.set('Content-type', 'text/plain');
       res.status(404).send('Not Found');
-      next(err);
     });
 });
 
@@ -34,10 +33,9 @@ router.get('/users/:userId/exercises/:exId/scores/:scId', (req, res, next) => {
     .then((user_score) => {
       res.json(user_score);
     })
-    .catch((err) => {
+    .catch(() => {
       res.set('Content-type', 'text/plain');
       res.status(404).send('Not Found');
-      next(err);
     });
 });
 
@@ -55,10 +53,9 @@ router.post('/users/:userId/exercises/:exId/scores', ev(validations.post), (req,
       delete user_scores[0].updated_at;
       res.json(user_scores[0]);
     })
-    .catch((err) => {
+    .catch(() => {
       res.set('Content-type', 'text/plain');
       res.status(400).send('Invalid Input');
-      next(err);
     });
 });
 

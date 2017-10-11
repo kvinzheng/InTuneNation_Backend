@@ -1,22 +1,23 @@
 const express = require('express');
 const knex = require('../knex');
-
-const router = express.Router();
-
 const ev = require('express-validation');
 const validations = require('../validations/exercises.js');
+
+const router = express.Router();
 
 router.get('/users/:userId/exercises', (req, res, next) => {
   knex('exercises')
     .where('user_id', req.params.userId)
     .orderBy('id', 'asc')
     .then((user_exercises) => {
+      if(!user_exercises.length) {
+        throw new Error('Not Found');
+      }
       res.json(user_exercises);
     })
-    .catch((err) => {
+    .catch(() => {
       res.set('Content-type', 'text/plain');
       res.status(404).send('Not Found');
-      next(err);
     });
 });
 
@@ -29,12 +30,14 @@ router.get('/users/:userId/exercises/:exId', (req, res, next) => {
     })
     .first()
     .then((user_exercise) => {
+      if(!user_exercise){
+        throw new Error('Not Found');
+      }
       res.json(user_exercise);
     })
-    .catch((err) => {
+    .catch(() => {
       res.set('Content-type', 'text/plain');
       res.status(404).send('Not Found');
-      next(err);
     });
 });
 
@@ -60,10 +63,9 @@ router.post('/users/:userId/exercises', ev(validations.post), (req, res, next) =
           });
       }
     })
-    .catch((err) => {
+    .catch(() => {
       res.set('Content-type', 'text/plain');
       res.status(400).send('Invalid Input');
-      next(err);
     });
 });
 

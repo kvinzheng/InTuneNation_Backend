@@ -1,5 +1,5 @@
-const passport = require('passport');
 require('dotenv').config();
+const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 
 const knex = require('../knex');
@@ -97,7 +97,6 @@ router.get('/auth/google/success', (req, res) => {
 });
 
 router.get('/auth/google/failure', (req, res) => res.json('user is not authenticated yet'));
-
 
 module.exports = {
   googleRouter: router,

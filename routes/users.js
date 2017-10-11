@@ -62,9 +62,8 @@ router.post('/user/login', ev(validations.post), (req, res, next) => {
     res.set('token', token);
     res.send(authUser);
   })
-  .catch((err) => {
+  .catch(() => {
     res.status(400).send('Invalid email or password.');
-    next(err);
   });
 });
 
@@ -115,9 +114,8 @@ router.post('/user/signup', ev(validations.post), (req, res, next) => {
       res.set('token', token);
       res.status(200).send(camelizedUser);
     })
-    .catch((error) => {
+    .catch(() => {
       res.status(400).send('Invalid Input.');
-      next(error);
     });
   }
 });
