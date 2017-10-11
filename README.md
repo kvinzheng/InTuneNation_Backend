@@ -31,6 +31,13 @@ passport.use(new GoogleStrategy({
 }));
 ```
 
+## Create Local Data Base ##
+
+Create the database locally.
+1. For running development environment locally, from the command line run the following commands: ```createdb ppp_dev```
+2. To run all of the tests locally, From the command line run the following commands: ```createdb ppp_test```
+3. Seed the database. From the command line run the following commands:```knex migrate:rollback && knex migrate:latest && knex seed:run```
+
 ## Testing ##
 In order to run our routing test, please type **run** ```npm test``` in your terminal
 
@@ -56,13 +63,11 @@ function middlewareVerify(req, res, next) {
 ```
 
 ## Routes Documentation:
-
 Backend contains endpoint routes for user accounts, user exercises, and user scores. Token verification is required to access `/users` routes. Token is assigned upon signup and login and must be passed through the header request. All successful responses are returned in JSON format. Failed responses are returned in plain text. `:userId` , `:exId` , & `:scId` must be replaced with integers when making a backend API request.
 
 **Show all users**
 
 `GET /user`
-
 Response:
 ```
 [
@@ -81,7 +86,6 @@ Response:
 **User Signup**
 
 ` POST /user/signup`
-
 Request Body:
 ```
 {
@@ -91,7 +95,6 @@ Request Body:
   password: string
 }
 ```
-
 Response:
 ```
 {
@@ -107,7 +110,6 @@ Response:
 **User Login**
 
 `POST /user/login`
-
 Request Body:
 ```
 {
@@ -115,7 +117,6 @@ Request Body:
   password: string
 }
 ```
-
 Response:
 ```
 {
@@ -131,12 +132,10 @@ Response:
 **GET All exercises that belong to a user**
 
 `GET /users/:userId/exercises`
-
 Request Header:
 ```
 token: string
 ```
-
 Response:
 ```
 [
@@ -154,13 +153,10 @@ Response:
 **GET Specific exercise that belongs to a user**
 
 `GET /users/:userId/exercises/:exId`
-
 Request Header:
 ```
 token: string
 ```
-
-
 Response:
 ```
 {
@@ -175,20 +171,16 @@ Response:
 **POST User exercise to database**
 
 `POST /users/:userId/exercises`
-
 Request Header:
 ```
 token: string
 ```
-
-
 Request Request Body:
 ```
 {
   notes_array: array
 }
 ```
-
 Response:
 ```
 {
@@ -201,13 +193,10 @@ Response:
 **GET All scores that belong to an exercise**
 
 `GET /users/:userId/exercises/:exId/scores`
-
 Request Header:
 ```
 token: string
 ```
-
-
 Response:
 ```
 [
@@ -230,7 +219,6 @@ Request Header:
 ```
 token: string
 ```
-
 Response:
 ```
 {
@@ -251,7 +239,6 @@ Request Header:
 ```
 token: string
 ```
-
 Request Body:
 ```
 {
@@ -259,7 +246,6 @@ Request Body:
   avg_score: float
 }
 ```
-
 Response:
 ```
 {
@@ -271,9 +257,19 @@ Response:
 ```
 
 ## Error Responses ##
+```javascript
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});
+```
 
 400: `Invalid Input`
-
 401: `Unauthorized`
-
 404: `Not Found`
+500: `Internal Server Error`
