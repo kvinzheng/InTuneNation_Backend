@@ -1,7 +1,8 @@
 const express = require('express');
 const knex = require('../knex');
+
 const router = express.Router();
-//validations
+// validations
 const ev = require('express-validation');
 const validations = require('../validations/scores.js');
 // User can get score combinations from a particular exercise

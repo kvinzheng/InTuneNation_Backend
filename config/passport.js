@@ -5,7 +5,6 @@ const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const knex = require('../knex');
 const session = require('express-session');
 const express = require('express');
-const RedisStore = require('connect-redis')(session);
 
 const app = express();
 const morgan = require('morgan');
@@ -56,15 +55,6 @@ passport.use(new GoogleStrategy({
       return done(null, newUser);
     }
   });
-}));
-
-router.use(session({
-  secret: 'cookie_secret',
-  name: 'kaas',
-  store: new RedisStore({ host: '127.0.0.1', port: 6379 }),
-  proxy: true,
-  resave: true,
-  saveUninitialized: true,
 }));
 
 router.use(passport.initialize());

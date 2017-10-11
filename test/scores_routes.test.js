@@ -15,9 +15,9 @@ before(done => {
   knex.migrate.latest().then(() => {
     return knex.seed.run()
   }).then(() => {
-    request(server).post('/user/login').send(account).end((err, res) => {
+    request(server).post('/user/login').send(account)
+    .end((err, res) => {
       token = res.body.token;
-      // done();
     });
     done();
   }).catch((err) => {
@@ -30,7 +30,6 @@ after((done) => {
     done();
   });
 });
-// console.log('authotken ', auth);
 
 describe('GET /users/:userId/exercises/:exId/scores', () => {
   it('responds with 200 & JSON', done => {
@@ -40,17 +39,13 @@ describe('GET /users/:userId/exercises/:exId/scores', () => {
     .set('Accept', 'application/json')
     .expect('Content-type', /json/)
     .expect(200, done);
-
-    function onResponse(err, res){
-      auth.token = res.body.token
-    }
   });
 
   it('requests an array of all scores of a user exercise', done => {
     request(server)
     .get('/users/1/exercises/6/scores')
     .set({ token: token })
-    .end( (err, res ) => {
+    .end((err, res) => {
       expect(res.body).to.deep.equal([
         {
           id: 10,
@@ -88,7 +83,6 @@ describe('GET /users/:userId/exercises/:exId/scores', () => {
           created_at: "2016-06-29T14:26:16.000Z",
           updated_at: "2016-06-29T14:26:16.000Z",
         }
-
       ]);
       done();
     });
@@ -96,7 +90,6 @@ describe('GET /users/:userId/exercises/:exId/scores', () => {
 });
 
 describe('POST /users/:userId/exercises/:exId/scores', () => {
-
   const newScores = {
     id: 21,
     user_id: 1,
@@ -142,5 +135,4 @@ describe('POST /users/:userId/exercises/:exId/scores', () => {
         });
       });
     });
-
 });

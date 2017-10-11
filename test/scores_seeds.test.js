@@ -6,7 +6,7 @@ const { expect, assert } = require('chai');
 const server = require('../server.js');
 const knex = require('../knex.js');
 
-beforeEach( done => {
+beforeEach(done => {
   knex.migrate.latest()
   .then(() => {
     return knex.seed.run()
@@ -23,8 +23,8 @@ afterEach((done) => {
   knex.migrate.rollback()
   .then(() => {
     done();
-  })
-})
+  });
+});
 
 
 describe('scores seeds', () => {

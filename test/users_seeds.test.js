@@ -23,8 +23,8 @@ afterEach((done) => {
   knex.migrate.rollback()
   .then(() => {
     done();
-  })
-})
+  });
+});
 
 
 describe('users seeds', () => {
@@ -71,14 +71,14 @@ it('users rows', (done) => {
         created_at: new Date('2016-06-24 14:26:16 UTC'),
         updated_at: new Date('2016-06-24 14:26:16 UTC'),
       }];
-      for( let i = 0; i < expected.length; i++){
-        assert.deepEqual(
-          actual[i],
-          expected[i],
-          `row id=${i + 1} not the same`
-        );
-      }
-      done();
+    for (let i = 0; i < expected.length; i++) {
+      assert.deepEqual(
+        actual[i],
+        expected[i],
+        `row id=${i + 1} not the same`,
+      );
+    }
+    done();
   })
   .catch((err) => {
     done(err);

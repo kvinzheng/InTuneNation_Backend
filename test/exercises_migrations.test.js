@@ -20,7 +20,6 @@ afterEach( done => {
   });
 });
 
-
 describe('exercises migrations', () => {
   it('testing exercises migration', done => {
     knex('exercises').columnInfo()
