@@ -27,7 +27,7 @@ passport.deserializeUser((obj, done) => {
 });
 
 let newUser;
-
+// apply passport google oauth
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -63,12 +63,12 @@ router.use(passport.session());
 router.get('/auth/google', passport.authenticate('google', {
   scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.profile.emails.read'],
 }));
-
+// google oauth url
 router.get('/auth/google/callback', passport.authenticate('google', {
   successRedirect: '/auth/google/success',
   failureRedirect: '/auth/google/failure',
 }));
-
+//  success redirect
 router.get('/auth/google/success', (req, res) => {
   let result;
   knex('users').where('email', newUser.email).first().then((user) => {
@@ -85,7 +85,7 @@ router.get('/auth/google/success', (req, res) => {
     res.redirect(`https://intunenation.herokuapp.com/interface/?${string}`);
   });
 });
-
+// failure redirect
 router.get('/auth/google/failure', (req, res) => res.json('user is not authenticated yet'));
 
 module.exports = {

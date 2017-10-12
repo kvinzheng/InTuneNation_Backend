@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 
 const app = express();
+// import routes
 const user = require('./routes/users');
 const exercises = require('./routes/exercises');
 const scores = require('./routes/scores');
@@ -25,7 +26,7 @@ if (app.get('env') === 'development') {
 
 app.use(cors());
 app.options('*', cors());
-
+// enable request body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -46,6 +47,7 @@ app.use((_req, res) => {
   res.sendStatus(404);
 });
 
+// error middleware handler
 app.use((err, _req, res, _next) => {
   if (err.status) {
     return res.status(err.status).set('Content-Type', 'text/plain').send(err.message);
@@ -55,7 +57,7 @@ app.use((err, _req, res, _next) => {
 });
 
 const port = process.env.PORT || 8000;
-
+// switch environment 
 app.listen(port, () => {
   if (app.get('env') !== 'test') {
     console.log('Listening on port', port);

@@ -21,7 +21,6 @@ router.get('/users/:userId/exercises', (req, res, next) => {
     });
 });
 
-
 router.get('/users/:userId/exercises/:exId', (req, res, next) => {
   knex('exercises')
     .where({

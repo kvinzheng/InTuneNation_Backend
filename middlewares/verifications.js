@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-
+// token verification
 function middlewareVerify(req, res, next) {
   jwt.verify(req.headers.token, process.env.JWT_KEY, (err, payload) => {
     if (err) {
