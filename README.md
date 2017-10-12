@@ -35,10 +35,9 @@ Our app is currently built entirely with Javascript, and the back-end is built w
 
 
 ## To Get Started ##
-
 1. ```npm install``` install dependencies
 2. ```touch .env``` Example .env file:
-3. Please note that this repo requires Google Oauth. Please go to [Google Developer Console](https://developers.google.com/identity/protocols/OAuth2) and click ``` Google API Console``` to register a new application and update the .env file with the client id and client secret. The callback URL will need to be updated here in IntuneBackEnd/config/passport.js
+3. Please note that this repo requires Google Oauth. Please go to [Google Developer Console](https://developers.google.com/identity/protocols/OAuth2) and click ``` Google API Console``` to register a new application and update the .env file with the client id and client secret. The callback URL will need to be updated here in ```IntuneBackEnd/config/passport.js```
 ```javascript
 //Jwt key
 JWT_KEY=XXXX
@@ -76,7 +75,7 @@ We wrote tests to test routes, seeds, and migrations.
 * [chai](http://chaijs.com/) (Chai is a BDD / TDD assertion library for node and the browser that can be delightfully paired with any javascript testing framework.)
 * [supertest](https://www.npmjs.com/package/supertest) (SuperTest is a module that provides high-level abstraction for testing HTTP in node.js.)
 
-## We built a middleware to verify an authenticated user
+## Authentication with JWT ##
 ```Javascript
 function middlewareVerify(req, res, next) {
   jwt.verify(req.headers.token, process.env.JWT_KEY, (err, payload) => {
@@ -94,7 +93,7 @@ function middlewareVerify(req, res, next) {
 ## Routes Documentation:
 Backend contains endpoint routes for user accounts, user exercises, and user scores. Token verification is required to access `/users` routes. Token is assigned upon signup and login and must be passed through the header request. All successful responses are returned in JSON format. Failed responses are returned in plain text. `:userId` , `:exId` , & `:scId` must be replaced with integers when making a backend API request.
 
-Simple Summary of all routes
+** Simple Summary of all routes**
 - GET /user
 - POST /user/signup
 - POST /user/login
@@ -107,6 +106,7 @@ Simple Summary of all routes
 
 **Show all users**
 `GET /user`
+
 Response:
 ```
 [
@@ -124,6 +124,7 @@ Response:
 
 **User Signup**
 ` POST /user/signup`
+
 Request Body:
 ```
 { firstName: string, lastName: string, email: string, password: string }
@@ -142,6 +143,7 @@ Response:
 
 **User Login**
 `POST /user/login`
+
 Request Body:
 ```
 { email: string, password: string }
@@ -160,6 +162,7 @@ Response:
 
 **GET All exercises that belong to a user**
 `GET /users/:userId/exercises`
+
 Request Header:
 ```
 token: string
@@ -180,6 +183,7 @@ Response:
 
 **GET Specific exercise that belongs to a user**
 `GET /users/:userId/exercises/:exId`
+
 Request Header:
 ```
 token: string
@@ -197,6 +201,7 @@ Response:
 
 **POST User exercise to database**
 `POST /users/:userId/exercises`
+
 Request Header:
 ```
 token: string
@@ -216,6 +221,7 @@ Response:
 
 **GET All scores that belong to an exercise**
 `GET /users/:userId/exercises/:exId/scores`
+
 Request Header:
 ```
 token: string
@@ -236,6 +242,7 @@ Response:
 
 **Get Specific score that belong to an exercise***
 `GET /users/:userId/exercises/:exId/scores/:scId`
+
 Request Header:
 ```
 token: string
@@ -254,6 +261,7 @@ Response:
 
 **POST Score for a specific exercise**
 `POST /users/:userId/exercises/:exId/scores`
+
 Request Header:
 ```
 token: string
