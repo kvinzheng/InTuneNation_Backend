@@ -33,6 +33,27 @@ Our app is currently built entirely with Javascript, and the back-end is built w
 * [bcrypt](https://www.npmjs.com/package/bcrypt-as-promised) (bcrypt is a hashing algorithm which encrypt passport, it provides 'compare' and 'hash' functionalities)
 * [morgan](https://www.npmjs.com/package/morgan) (morgan is a middleware function using given format and options. It allows developers to view more detail of your HTTP requests)
 
+
+## To Get Started ##
+
+1. ```npm install``` install dependencies
+2. ```touch .env``` Example .env file:
+3. Please note that this repo requires Google Oauth. Please go to [Google Developer Console](https://developers.google.com/identity/protocols/OAuth2) and click ``` Google API Console``` to register a new application and update the .env file with the client id and client secret. The callback URL will need to be updated here in IntuneBackEnd/config/passport.js
+```javascript
+//Jwt key
+JWT_KEY=XXXX
+//This is google key
+GOOGLE_CLIENT_ID='XXXX'
+GOOGLE_CLIENT_SECRET='XXXX'
+//callbackURL
+CALL_BACK_URL='http://localhost:8000/auth/google/callback'
+// Deployed version CALL_BACK_URL=`https://ppp-capstone-music.herokuapp.com/auth/google/callback`
+```
+4. For running development environment locally, run command line: ```createdb ppp_dev```
+5. To run all of the tests locally, run command line: ```createdb ppp_test```
+6. Seed the database. run command line:```knex migrate:rollback && knex migrate:latest && knex seed:run```
+
+
 ## Google OAuth ##
 I make an new instance of GoogleStrategy using 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', and 'CALL_BACK_URL'. You can obtain those information from your Google plus account. after Google successfully verify your information, it would give me back your profile information in an object form. Then, that is how I would display your information on the screen.
 
@@ -47,17 +68,10 @@ passport.use(new GoogleStrategy({
 }));
 ```
 
-## Create Local Data Base ##
-
-Create the database locally.
-1. For running development environment locally, from the command line run the following commands: ```createdb ppp_dev```
-2. To run all of the tests locally, From the command line run the following commands: ```createdb ppp_test```
-3. Seed the database. From the command line run the following commands:```knex migrate:rollback && knex migrate:latest && knex seed:run```
-
 ## Testing ##
-In order to run our routing test, please type **run** ```npm test``` in your terminal
-
 We wrote tests to test routes, seeds, and migrations.
+**TO Run Test** run ```npm test``` in your terminal
+
 * [mocha](https://mochajs.org/) (Mocha is a feature-rich Javascript testing framework running on Node.js)
 * [chai](http://chaijs.com/) (Chai is a BDD / TDD assertion library for node and the browser that can be delightfully paired with any javascript testing framework.)
 * [supertest](https://www.npmjs.com/package/supertest) (SuperTest is a module that provides high-level abstraction for testing HTTP in node.js.)
@@ -79,6 +93,26 @@ function middlewareVerify(req, res, next) {
 
 ## Routes Documentation:
 Backend contains endpoint routes for user accounts, user exercises, and user scores. Token verification is required to access `/users` routes. Token is assigned upon signup and login and must be passed through the header request. All successful responses are returned in JSON format. Failed responses are returned in plain text. `:userId` , `:exId` , & `:scId` must be replaced with integers when making a backend API request.
+
+Simple Summary of all routes
+- GET /user
+- POST /user/signup
+
+
+| HTTP        | route        | Response |
+| ------------- |:-------------:| -----:|
+| get     | /user | ```javascript [ {
+    id: integer,
+    first_name: string,
+    last_name: string,
+    email: string,
+    profile_picture: string,
+    created_at: timestamp,
+    updated_at: timestamp,
+  }] |
+
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
 
 **Show all users**
 

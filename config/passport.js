@@ -32,6 +32,7 @@ passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: process.env.CALL_BACK_URL,
+  // localhost:8000 is default port if running locally
   passReqToCallback: true,
 }, (request, accessToken, refreshToken, profile, done) => {
   newUser = {
