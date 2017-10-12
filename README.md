@@ -240,7 +240,7 @@ Response:
 ]
 ```
 
-**Get Specific score that belong to an exercise***
+**Get Specific score that belong to an exercise**
 `GET /users/:userId/exercises/:exId/scores/:scId`
 
 Request Header:
