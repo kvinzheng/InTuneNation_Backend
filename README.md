@@ -25,13 +25,13 @@ exports.up = function (knex) {
 
 ## Technologies Used
 
-Our app is currently built entirely with Javascript, and the back-end is built with Node.js Express server. We also rely on a few other pieces of technology, including but not limited to:
+Our app is currently built entirely with Javascript, and the back-end is built with Node.js Express server.
 * [Google-Oauth](http://passportjs.org/docs) (Google Passport 2.0 OAuth Technologies allow user to sign in through google's account)
-* [Json-Web-Token](https://www.npmjs.com/package/jsonwebtoken) (Json-Web-Token allows our server to verify if the users have the web token that we assigned to them with our unique JWT key)
+* [Json-Web-Token](https://www.npmjs.com/package/jsonwebtoken) (Json-Web-Token allows our server to authenticate users)
 * [body-parser](https://www.npmjs.com/package/body-parser-json) (Parse incoming request bodies in a middleware before your handlers)
 * [knex](http://knexjs.org/) (Knex.js is a SQL query builder for Postgres)
 * [bcrypt](https://www.npmjs.com/package/bcrypt-as-promised) (bcrypt is a hashing algorithm which encrypt passport, it provides 'compare' and 'hash' functionalities)
-* [morgan](https://www.npmjs.com/package/morgan) (morgan is a middleware function using given format and options. It allows developers to view more detail of your HTTP requests)
+* [morgan](https://www.npmjs.com/package/morgan) (morgan is a middleware function using given format and options)
 
 
 ## To Get Started ##
