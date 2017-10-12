@@ -125,7 +125,8 @@ Response:
 **User Signup**
 ` POST /user/signup`
 Request Body:
-```{ firstName: string, lastName: string, email: string, password: string }
+```
+{ firstName: string, lastName: string, email: string, password: string }
 ```
 Response:
 ```
@@ -142,7 +143,8 @@ Response:
 **User Login**
 `POST /user/login`
 Request Body:
-``` { email: string, password: string }
+```
+{ email: string, password: string }
 ```
 Response:
 ```
@@ -159,7 +161,8 @@ Response:
 **GET All exercises that belong to a user**
 `GET /users/:userId/exercises`
 Request Header:
-``` token: string
+```
+token: string
 ```
 Response:
 ```
@@ -199,7 +202,8 @@ Request Header:
 token: string
 ```
 Request Request Body:
-``` { notes_array: array }
+```
+{ notes_array: array }
 ```
 Response:
 ```
@@ -213,7 +217,8 @@ Response:
 **GET All scores that belong to an exercise**
 `GET /users/:userId/exercises/:exId/scores`
 Request Header:
-``` token: string
+```
+token: string
 ```
 Response:
 ```
@@ -230,9 +235,7 @@ Response:
 ```
 
 **Get Specific score that belong to an exercise***
-
 `GET /users/:userId/exercises/:exId/scores/:scId`
-
 Request Header:
 ```
 token: string
@@ -250,15 +253,14 @@ Response:
 ```
 
 **POST Score for a specific exercise**
-
 `POST /users/:userId/exercises/:exId/scores`
-
 Request Header:
 ```
 token: string
 ```
 Request Body:
-``` { scores_array: array, avg_score: float }
+```
+{ scores_array: array, avg_score: float }
 ```
 Response:
 ```
