@@ -30,8 +30,8 @@ Our app is currently built entirely with Javascript, and the back-end is built w
 * [Json-Web-Token](https://www.npmjs.com/package/jsonwebtoken) (Json-Web-Token allows our server to authenticate users)
 * [body-parser](https://www.npmjs.com/package/body-parser-json) (Parse incoming request bodies in a middleware before your handlers)
 * [knex](http://knexjs.org/) (Knex.js is a SQL query builder for Postgres)
-* [bcrypt](https://www.npmjs.com/package/bcrypt-as-promised) (bcrypt is a hashing algorithm which encrypt passport, it provides 'compare' and 'hash' functionalities)
-* [morgan](https://www.npmjs.com/package/morgan) (morgan is a middleware function using given format and options)
+* [bcrypt](https://www.npmjs.com/package/bcrypt-as-promised) (bcrypt is a hashing algorithm which encrypt password, it provides 'compare' and 'hash' functionalities)
+* [morgan](https://www.npmjs.com/package/morgan) (Morgan is a middleware function using given format and options)
 
 
 ## To Get Started ##
