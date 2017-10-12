@@ -97,25 +97,15 @@ Backend contains endpoint routes for user accounts, user exercises, and user sco
 Simple Summary of all routes
 - GET /user
 - POST /user/signup
-
-
-| HTTP        | route        | Response |
-| ------------- |:-------------:| -----:|
-| get     | /user | ```javascript [ {
-    id: integer,
-    first_name: string,
-    last_name: string,
-    email: string,
-    profile_picture: string,
-    created_at: timestamp,
-    updated_at: timestamp,
-  }] |
-
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+- POST /user/login
+- GET /users/:userId/exercises
+- GET /users/:userId/exercises/:exId
+- POST /users/:userId/exercises
+- GET /users/:userId/exercises/:exId/scores
+- GET /users/:userId/exercises/:exId/scores/:scId
+- POST /users/:userId/exercises/:exId/scores
 
 **Show all users**
-
 `GET /user`
 Response:
 ```
@@ -128,21 +118,14 @@ Response:
     profile_picture: string,
     created_at: timestamp,
     updated_at: timestamp,
-  }
+  },
 ]
 ```
 
 **User Signup**
-
 ` POST /user/signup`
 Request Body:
-```
-{
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string
-}
+```{ firstName: string, lastName: string, email: string, password: string }
 ```
 Response:
 ```
@@ -157,14 +140,9 @@ Response:
 ```
 
 **User Login**
-
 `POST /user/login`
 Request Body:
-```
-{
-  email: string,
-  password: string
-}
+``` { email: string, password: string }
 ```
 Response:
 ```
@@ -179,11 +157,9 @@ Response:
 ```
 
 **GET All exercises that belong to a user**
-
 `GET /users/:userId/exercises`
 Request Header:
-```
-token: string
+``` token: string
 ```
 Response:
 ```
@@ -200,7 +176,6 @@ Response:
 ```
 
 **GET Specific exercise that belongs to a user**
-
 `GET /users/:userId/exercises/:exId`
 Request Header:
 ```
@@ -218,17 +193,13 @@ Response:
 ```
 
 **POST User exercise to database**
-
 `POST /users/:userId/exercises`
 Request Header:
 ```
 token: string
 ```
 Request Request Body:
-```
-{
-  notes_array: array
-}
+``` { notes_array: array }
 ```
 Response:
 ```
@@ -240,11 +211,9 @@ Response:
 ```
 
 **GET All scores that belong to an exercise**
-
 `GET /users/:userId/exercises/:exId/scores`
 Request Header:
-```
-token: string
+``` token: string
 ```
 Response:
 ```
@@ -282,18 +251,14 @@ Response:
 
 **POST Score for a specific exercise**
 
-`router.post(‘/users/:userId/exercises/:exId/scores’)`
+`POST /users/:userId/exercises/:exId/scores`
 
 Request Header:
 ```
 token: string
 ```
 Request Body:
-```
-{
-  scores_array: array,
-  avg_score: float
-}
+``` { scores_array: array, avg_score: float }
 ```
 Response:
 ```
@@ -308,7 +273,7 @@ Response:
 ## Error Responses ##
 ```javascript
 // production error handler
-// no stacktraces leaked to user
+// no stack traces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
