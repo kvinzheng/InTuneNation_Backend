@@ -5,6 +5,22 @@ This is the backend repository for our InTuneNation application and is deployed 
 ## Entity Relationship Diagram
 ![Entity Relationship Diagram](https://image.ibb.co/ighMPk/In_Tune_Nation_ERD.jpg)
 
+Here is exercises table's schema
+
+``` javascript
+exports.up = function (knex) {
+  return knex.schema.createTable('exercises', (table) => {
+    table.increments();
+    // exercises table belongs to user's table
+    table.integer('user_id').references('id').inTable('users').onDelete('CASCADE')
+    .notNullable()
+    .index();
+    table.string('notes_array').notNullable().defaultTo('[]');
+    table.timestamps(true, true);
+  });
+};
+```
+
 **Description**: The ERD schema starts at the root with “users” accounts. Users are able to create “exercises” that are tied to a foreign key of a user id. Each exercise can have a multitude of “scores”, tied by foreign keys of exercises_id and user_id.
 
 ## Technologies Used
